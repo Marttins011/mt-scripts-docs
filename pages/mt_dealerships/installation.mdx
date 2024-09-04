@@ -1,0 +1,44 @@
+# This is the docs for the Dealerships 2.0, the 1.0 is no longer updated!!
+
+## Dealerships SQL
+Run the following SQL query to your data base
+```sql copy
+CREATE TABLE `dealership_stock` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`model` MEDIUMTEXT,
+	`stock` INT(10) DEFAULT 0,
+	`job` MEDIUMTEXT,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `id` (`id`) USING BTREE
+);
+
+CREATE TABLE `dealership_sells` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`description` LONGTEXT,
+	`job` MEDIUMTEXT,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `id` (`id`) USING BTREE
+);
+
+CREATE TABLE `dealership_imports` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`description` LONGTEXT,
+	`job` MEDIUMTEXT,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `id` (`id`) USING BTREE
+);
+```
+
+## ESX Vehicles SQL
+If you're using ESX and don't have already runned the sql of the default vehicleshop run this sql query
+```sql copy
+CREATE TABLE `owned_vehicles` (
+	`owner` VARCHAR(60) NOT NULL,
+	`plate` varchar(12) NOT NULL,
+	`vehicle` longtext,
+	`type` VARCHAR(20) NOT NULL DEFAULT 'car',
+	`job` VARCHAR(20) NULL DEFAULT NULL,
+	`stored` TINYINT(1) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`plate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```

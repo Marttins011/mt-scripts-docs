@@ -1,0 +1,123 @@
+## Main
+This is the main config file of the script where you can choose your framework and dependicies
+```lua filename="mt_dealerships/configs/config.lua"
+Config = Config or {}
+
+Config.debug = false -- if true it'll print some debug on F8/console and active all zones debug
+Config.framework = 'qbx' -- qb, qbx, esx (need to change the export on the Config.core)
+Config.core = exports['qb-core']:GetCoreObject() -- Your core export (for qb is exports['qb-core']:GetCoreObject()) (for esx is exports.es_extended:getSharedObject()) (for qbx you can just delete this line and add '@qbx_core/modules/playerdata.lua', to the fxmanifest.lua client_scripts)
+Config.target = 'ox_target' -- ox_target, qb-target, interact, ...
+Config.banking = 'Renewed-Banking' -- qb-banking, Renewed-Banking, (can change at server/functions.lua) ...
+
+Config.webhooks = {
+    vehicleImported = '',
+    vehicleBought = '',
+}
+
+Config.commands = {
+    addStock = { command = 'addstock', restricted = 'group.admin' },
+    removeStock = { command = 'removestock', restricted = 'group.admin' },
+}
+```
+
+## Vehicles
+This is where you can add your vehicles to show on the dealership, you can choose the shop, category and etc to place on the vehicle
+```lua filename="mt_dealerships/configs/vehicles.lua"
+Config.vehicles = Config.vehicles or {}
+
+local vehicles = { -- Vehicle list, credits to qb-core!
+    {
+        model = 'asbo',        -- This has to match the spawn code of the vehicle
+        name = 'Asbo',         -- This is the display of the vehicle
+        brand = 'Maxwell',     -- This is the vehicle's brand
+        price = 4000,          -- The price that the vehicle sells for
+        category = 'compacts', -- Category of the vehilce, stick with GetVehicleClass() options https://docs.fivem.net/natives/?_0x29439776AAA00A62
+        shop = { 'cardealer', 'fmpdm' }, -- Can be a single shop or multiple shops. For multiple shops for example {'shopname1','shopname2','shopname3'}
+        class = 'C', --  This is the vehicle class, can be D, C, B, A, S or X (optional)
+        seats = 2, -- Number of seats (optional)
+        weight = 50, -- Vehicle trunk weight or total weight includin glove box (optional)
+    }
+}
+
+for i = 1, #vehicles do
+    Config.vehicles[vehicles[i].model] = {
+        spawncode = vehicles[i].model,
+        name = vehicles[i].name,
+        brand = vehicles[i].brand,
+        model = vehicles[i].model,
+        price = vehicles[i].price,
+        category = vehicles[i].category,
+        shop = vehicles[i].shop,
+        class = vehicles[i].class or nil,
+        seats = vehicles[i].seats or nil,
+        weight = vehicles[i].weight or nil,
+    }
+end
+```
+
+## Dealerships folder
+This is an example of dealership config, follow the example and read the comments to understand what does every field and how to create your own restaurant
+```lua filename="mt_dealerships/dealerships/..." copy
+Config.dealerships = Config.dealerships or {}
+
+Config.dealerships.cardealer = { -- Dealership ID, NEEDS TO BE THE SAME AS THE JOB!!!
+    enabled = true, -- true or false to enable or disable the dealership
+    label = 'Premium Deluxe Motorsports', -- Dealership label
+    logo = 'https://i.ibb.co/nkBN3bs/logo.png', -- Dealership logo that'll show on UI
+    job = 'cardealer', -- Dealership job or false to not player owned dealerships, NEEDS TO BE THE SAME AS THE ID!!!
+    useStock = true, -- When using job = false this will be ignored
+    allowBuyCatalogue = true, -- If true players will be able to buy the vehicles on the catalogue
+    needsMission = true, -- Set to false or true to disable/disable the needing of going pick up the car
+    testDriveRoutingBucket = true, -- Set this to false if you don't want the test drive to be inside of a Routing Bucket
+    testDriveTime = 50, -- Test drive time in seconds
+    testDriveSpawn = vec4(-69.48, -1105.88, 26.07, 73.5), -- Test drive spawn coords
+    truck = 'packer', -- The truck used on importation
+    trailer = 'tr4', -- The trailer used on importation
+    truckSpawn = vec4(-58.46, -1072.99, 27.23, 70.0), -- Importation truck spawn coords
+    buySpawn = vec4(-17.59, -1107.66, 26.65, 161.25), -- Vehicle buy spawn coords
+    comissions = { buyPercentage = 50, sellComission = 10 }, -- The dealership commisions (buyPercentage is the percentage of vehicle price that the dealership will buy it and the sellComission is the comission that the employee will earn on selling vehicles to players)
+    blip = { enabled = true, coords = vec3(-58.01, -1097.08, 26.44), sprite = 523, color = 3, scale = 0.6, display = 4 }, -- Dealership map blip
+    dashboards = { -- Dealership dashboards to import vehicles and see transations and etc
+        { coords = vec3(-45.9, -1090.5, 26.4), radius = 0.5, includeBossMenu = true },
+    },
+    catalogues = { -- The catalogues to the players see the vehicle and emplooyes change the vehicle on showrrom
+        { coords = vec3(-46.7, -1094.6, 26.6), radius = 0.3, vehicleCoords = vec4(-47.34, -1097.28, 25.46, 299.48), vehicle = 'premier', vehicleColor = 54 },
+        { coords = vec3(-42.1, -1096.2, 26.6), radius = 0.3, vehicleCoords = vec4(-42.82, -1098.86, 25.46, 301.18), vehicle = 'mesa', vehicleColor = 0 },
+        { coords = vec3(-37.2, -1098.0, 26.6), radius = 0.3, vehicleCoords = vec4(-38.15, -1100.60, 25.46, 296.99), vehicle = 'vacca', vehicleColor = 73 },
+        { coords = vec3(-33.0, -1099.5, 26.6), radius = 0.3, vehicleCoords = vec4(-33.69, -1102.26, 25.46, 297.53), vehicle = 'cavalcade', vehicleColor = 4 },
+    },
+    categories = { -- The categories that will show on the catalogue and dashboard (need to add the shop with the job name to the vehicles.lua too on the shops field otherwise it'll not show the vehicles!!)
+        { label = 'Compacts', id = 'compacts' },
+        { label = 'Sedans', id = 'sedans' },
+        { label = 'SUVs', id = 'suvs' },
+        { label = 'Coupes', id = 'coupes' },
+        { label = 'Muscle', id = 'muscle' },
+        { label = 'Sports Classics', id = 'sportsclassics' },
+        { label = 'Sports', id = 'sports' },
+        { label = 'Super', id = 'super' },
+        { label = 'Motorcycles', id = 'motorcycles' },
+        { label = 'OffRoad', id = 'offroad' },
+        { label = 'Industrial', id = 'industrial' },
+        { label = 'Utility', id = 'utility' },
+        { label = 'Vans', id = 'vans' },
+        { label = 'Cycles', id = 'cycles' },
+        { label = 'Service', id = 'service' },
+        { label = 'Commercial', id = 'commercial' },
+        { label = 'Open Wheel', id = 'openwheel' },
+    },
+    pickups = {
+        vec4(1201.35, -3187.03, 5.98, 175.35)
+    }
+}
+```
+
+## Add new vehicles images
+To add new images to vehicles make sure that you have the vehiclesImages folder inside of mt_dealerships folder like this:
+![imagem](https://i.ibb.co/W30Vnc1/Captura-de-ecr-2024-06-02-154736.png)
+
+If the folder is not created make sure to create it, the name needs to be `vehiclesImages`
+
+After creating the folder you just need to add some vehicle image inside of it and make sure that the image name is the spawn name of the vehicle followed with .png for example `adder.png`
+
+Here's an example:
+![imagem](https://i.ibb.co/4pdtdpg/Captura-de-ecr-2024-06-02-155153.png)
