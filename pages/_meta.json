@@ -1,5 +1,9 @@
 {
   "index": "Introduction",
+  "mt-restaurants": "MT Restaurants",
+  "mt_dealerships": "MT Dealerships",
+  "mt_workshops": "MT Workshops",
+  "mt_lib": "MT Lib",
   "contact": {
     "title": "Store",
     "type": "page",
