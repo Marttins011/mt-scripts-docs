@@ -1,0 +1,918 @@
+# This is the docs for the Restaurants 2.0, the 1.0 is no longer updated!!
+
+## SQL
+Run this SQL queries
+```sql copy
+CREATE TABLE `restaurants_recipes` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`label` VARCHAR(50) NULL DEFAULT NULL,
+	`description` VARCHAR(50) NULL DEFAULT NULL,
+	`image_url` VARCHAR(100) NULL DEFAULT NULL,
+	`ingredients` LONGTEXT NULL DEFAULT NULL,
+	`animation` VARCHAR(50) NULL DEFAULT NULL,
+	`type` VARCHAR(50) NULL DEFAULT NULL,
+	`stations` LONGTEXT NULL DEFAULT NULL,
+	`active` INT(10) NULL DEFAULT NULL,
+	`price` INT(10) NULL DEFAULT NULL,
+	`job` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+);
+
+CREATE TABLE `restaurants_menus` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`image_url` VARCHAR(100) NULL DEFAULT NULL,
+	`job` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+);
+```
+
+## Inventory items (OX Inventory)
+Add the following code to ox_inventory/data/items.lua (ingredients items is optional)
+```lua filename="ox_inventory/data/items.lua" copy
+["restaurant_food"] = {
+    label = "Restaurant food",
+    weight = 0,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt-restaurants.useFoodItem'
+    }
+},
+["restaurant_box"] = {
+    label = "Restaurant box",
+    weight = 0,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt-restaurants.useBoxItem'
+    }
+},
+["restaurant_menu"] = {
+    label = "Restaurant menu",
+    weight = 0,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt-restaurants.openMenu'
+    }
+},
+['meat'] = {
+    label = 'Meat',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['fish'] = {
+    label = 'Fish',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['onion'] = {
+    label = 'Onion',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['carrot'] = {
+    label = 'Carrot',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['lettuce'] = {
+    label = 'Lettuce',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cucumber'] = {
+    label = 'Cucumber',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['potato'] = {
+    label = 'Potato',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['tomato'] = {
+    label = 'Tomato',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['coffee_beans'] = {
+    label = 'Coffee Beans',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['wheat'] = {
+    label = 'Wheat',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['corn'] = {
+    label = 'Corn',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['strawberry'] = {
+    label = 'Strawerry',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['watermelon'] = {
+    label = 'Watermelon',
+    weight = 5,
+    stack = true,
+    close = true,
+    description = '',
+},
+['soya'] = {
+    label = 'Soya',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['pineapple'] = {
+    label = 'Pineapple',
+    weight = 10,
+    stack = true,
+    close = true,
+    description = '',
+},
+
+['apple'] = {
+    label = 'Apple',
+    weight = 12,
+    stack = true,
+    close = true,
+    description = '',
+},
+['pear'] = {
+    label = 'Pear',
+    weight = 12,
+    stack = true,
+    close = true,
+    description = '',
+},
+['lemon'] = {
+    label = 'Lemon',
+    weight = 12,
+    stack = true,
+    close = true,
+    description = '',
+},	
+['banana'] = {
+    label = 'Banana',
+    weight = 17,
+    stack = true,
+    close = true,
+    description = '',
+},
+['orange'] = {
+    label = 'Orange',
+    weight = 15,
+    stack = true,
+    close = true,
+    description = '',
+},
+['peach'] = {
+    label = 'Peach',
+    weight = 13,
+    stack = true,
+    close = true,
+    description = '',
+},
+['mango'] = {
+    label = 'Mango',
+    weight = 13,
+    stack = true,
+    close = true,
+    description = '',
+},
+
+['cutted_meat'] = {
+    label = 'Cutted meat',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_fish'] = {
+    label = 'Cutted fish',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_onion'] = {
+    label = 'Cutted onion',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_carrot'] = {
+    label = 'Cutted carrot',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_lettuce'] = {
+    label = 'Cutted lettuce',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_cucumber'] = {
+    label = 'Cutted cucumber',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_potato'] = {
+    label = 'Cutted potato',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_tomato'] = {
+    label = 'Cutted tomato',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_coffee'] = {
+    label = 'Coffee powder',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_wheat'] = {
+    label = 'Flour',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_corn'] = {
+    label = 'Corn flour',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_strawberry'] = {
+    label = 'Cutted strawberry',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_watermelon'] = {
+    label = 'Cutted watermelon',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_soya'] = {
+    label = 'Cutted tofu',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_pineapple'] = {
+    label = 'Cutted pineapple',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_apple'] = {
+    label = 'Cutted apple',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_pear'] = {
+    label = 'Cutted pear',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_lemon'] = {
+    label = 'Cutted lemon',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_banana'] = {
+    label = 'Cutted banana',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_peach'] = {
+    label = 'Cutted peach',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_mango'] = {
+    label = 'Cutted mango',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cutted_orange'] = {
+    label = 'Cutted orange',
+    weight = 20,
+    stack = true,
+    close = true,
+    description = '',
+},
+```
+
+## Inventory items (QB Inventory)
+Add the following code to qb-core/shared/items.lua (ingredients items is optional)
+```lua filename="qb-core/shared/items.lua" copy
+    restaurant_food              = { name = 'restaurant_food', label = 'Restaurant food', weight = 0, type = 'item', image = '', unique = true, useable = true, shouldClose = true, combinable = nil, description = '' },
+    restaurant_box               = { name = 'restaurant_box', label = 'Restaurant box', weight = 0, type = 'item', image = 'restaurant_box.png', unique = true, useable = true, shouldClose = true, combinable = nil, description = '' },
+    onion                        = { name = 'onion', label = 'Onion', weight = 8, type = 'item', image = 'onion.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    carrot                       = { name = 'carrot', label = 'Carrot', weight = 8, type = 'item', image = 'carrot.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    lettuce                      = { name = 'lettuce', label = 'Lettuce', weight = 8, type = 'item', image = 'lettuce.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cucumber                     = { name = 'cucumber', label = 'Cucumber', weight = 8, type = 'item', image = 'cucumber.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    potato                       = { name = 'potato', label = 'Potato', weight = 8, type = 'item', image = 'potato.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    tomato                       = { name = 'tomato', label = 'Tomato', weight = 8, type = 'item', image = 'tomato.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    coffee_beans                 = { name = 'coffee_beans', label = 'Coffee Beans', weight = 8, type = 'item', image = 'coffee_beans.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    wheat                        = { name = 'wheat', label = 'Wheat', weight = 8, type = 'item', image = 'wheat.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    corn                         = { name = 'corn', label = 'Corn', weight = 8, type = 'item', image = 'corn.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    strawberry                   = { name = 'strawberry', label = 'Strawberry', weight = 8, type = 'item', image = 'strawberry.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    watermelon                   = { name = 'watermelon', label = 'Watermelon', weight = 8, type = 'item', image = 'watermelon.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    soya                         = { name = 'soya', label = 'Soya', weight = 8, type = 'item', image = 'soya.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    pineapple                    = { name = 'pineapple', label = 'Pineapple', weight = 8, type = 'item', image = 'pineapple.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    apple                        = { name = 'apple', label = 'Apple', weight = 8, type = 'item', image = 'apple.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    pear                         = { name = 'pear', label = 'Pear', weight = 8, type = 'item', image = 'pear.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    lemon                        = { name = 'lemon', label = 'Lemon', weight = 8, type = 'item', image = 'lemon.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    banana                       = { name = 'banana', label = 'Banana', weight = 8, type = 'item', image = 'banana.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    orange                       = { name = 'orange', label = 'Orange', weight = 8, type = 'item', image = 'orange.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    peach                        = { name = 'peach', label = 'Peach', weight = 8, type = 'item', image = 'peach.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    mango                        = { name = 'mango', label = 'Mango', weight = 8, type = 'item', image = 'mango.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    meat                         = { name = 'meat', label = 'Meat', weight = 8, type = 'item', image = 'meat.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    fish                         = { name = 'fish', label = 'Fish', weight = 8, type = 'item', image = 'fish.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_meat                  = { name = 'cutted_meat', label = 'Cutted Meat', weight = 8, type = 'item', image = 'cutted_meat.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_fish                  = { name = 'cutted_fish', label = 'Cutted Fish', weight = 8, type = 'item', image = 'cutted_fish.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_onion                 = { name = 'cutted_onion', label = 'Cutted Onion', weight = 8, type = 'item', image = 'cutted_onion.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_carrot                = { name = 'cutted_carrot', label = 'Cutted Carrot', weight = 8, type = 'item', image = 'cutted_carrot.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_lettuce               = { name = 'cutted_lettuce', label = 'Cutted Lettuce', weight = 8, type = 'item', image = 'cutted_lettuce.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_cucumber              = { name = 'cutted_cucumber', label = 'Cutted Cucumber', weight = 8, type = 'item', image = 'cutted_cucumber.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_potato                = { name = 'cutted_potato', label = 'Cutted Potato', weight = 8, type = 'item', image = 'cutted_potato.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_tomato                = { name = 'cutted_tomato', label = 'Cutted Totato', weight = 8, type = 'item', image = 'cutted_tomato.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_wheat                 = { name = 'cutted_wheat', label = 'Flour', weight = 8, type = 'item', image = 'cutted_wheat.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_strawberry            = { name = 'cutted_strawberry', label = 'Cutted Strawberry', weight = 8, type = 'item', image = 'cutted_strawberry.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_watermelon            = { name = 'cutted_watermelon', label = 'Cutted Watermelon', weight = 8, type = 'item', image = 'cutted_watermelon.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_soya                  = { name = 'cutted_soya', label = 'Tofu', weight = 8, type = 'item', image = 'cutted_soya.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_pineapple             = { name = 'cutted_pineapple', label = 'Cutted Pineapple', weight = 8, type = 'item', image = 'cutted_pineapple.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_apple                 = { name = 'cutted_apple', label = 'Cutted Apple', weight = 8, type = 'item', image = 'cutted_apple.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_pear                  = { name = 'cutted_pear', label = 'Cutted Pear', weight = 8, type = 'item', image = 'cutted_pear.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_lemon                 = { name = 'cutted_lemon', label = 'Cutted Lemon', weight = 8, type = 'item', image = 'cutted_lemon.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_banana                = { name = 'cutted_banana', label = 'Cutted Banana', weight = 8, type = 'item', image = 'cutted_banana.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_peach                 = { name = 'cutted_peach', label = 'Cutted Peach', weight = 8, type = 'item', image = 'cutted_peach.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_mango                 = { name = 'cutted_mango', label = 'Cutted Mango', weight = 8, type = 'item', image = 'cutted_mango.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+    cutted_orange                = { name = 'cutted_orange', label = 'Cutted Orange', weight = 8, type = 'item', image = 'cutted_orange.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
+```
+
+## OX Inventory craft changes
+Here's some changes that you'll need to make at your inventory to make the craft system work integrated with the script (credits to Renewed Scripts for the changes!)
+
+**Step 1**
+Head over to ox_inventory/client.lua and search for this around line 175
+```lua filename="ox_inventory/cient.lua" copy
+'ox_inventory:openCraftingBench'
+```
+Now replace this
+```lua filename="ox_inventory/cient.lua" copy
+left = lib.callback.await('ox_inventory:openCraftingBench', 200, data.id, data.index)
+
+if left then
+	right = CraftingBenches[data.id]
+
+	if not right?.items then return end
+
+	local coords, distance
+
+	if not right.zones and not right.points then
+		coords = GetEntityCoords(cache.ped)
+		distance = 2
+	else
+		coords = shared.target == 'ox_target' and right.zones and right.zones[data.index].coords or right.points and right.points[data.index]
+		distance = coords and shared.target == 'ox_target' and right.zones[data.index].distance or 2
+	end
+
+	right = {
+		type = 'crafting',
+		id = data.id,
+		label = right.label or locale('crafting_bench'),
+		index = data.index,
+		slots = right.slots,
+		items = right.items,
+		coords = coords,
+		distance = distance
+	}
+end
+```
+with this
+```lua filename="ox_inventory/cient.lua" copy
+left, right = lib.callback.await('ox_inventory:openCraftingBench', 200, data.id, data.index)
+
+if left and right then
+	if not right?.items then return end
+
+	local coords, distance
+
+	if not right.zones and not right.points then
+		coords = GetEntityCoords(cache.ped)
+		distance = 2
+	else
+		coords = shared.target == 'ox_target' and right.zones and right.zones[data.index].coords or right.points and right.points[data.index]
+		distance = coords and shared.target == 'ox_target' and right.zones[data.index].distance or 2
+	end
+
+	right = {
+		type = 'crafting',
+		id = data.id,
+		label = right.label or locale('crafting_bench'),
+		index = data.index,
+		slots = right.slots,
+		items = right.items,
+		coords = coords,
+		distance = distance
+	}
+end
+```
+
+**Step 2**
+Remain in ox_inventory/client.lua and search for the following around line 1630
+```lua filename="ox_inventory/client.lua" copy
+'ox_inventory:startCrafting'
+```
+Here you want to replace this
+```lua filename="ox_inventory/client.lua" copy
+lib.callback.register('ox_inventory:startCrafting', function(id, recipe)
+	recipe = CraftingBenches[id].items[recipe]
+
+	return lib.progressCircle({
+		label = locale('crafting_item', recipe.metadata?.label or Items[recipe.name].label),
+		duration = recipe.duration or 3000,
+		canCancel = true,
+		disable = {
+			move = true,
+			combat = true,
+		},
+		anim = {
+			dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
+			clip = 'machinic_loop_mechandplayer',
+		}
+	})
+end)
+```
+With this
+```lua filename="ox_inventory/client.lua" copy
+lib.callback.register('ox_inventory:startCrafting', function(recipe)
+	return lib.progressCircle({
+		label = locale('crafting_item', recipe.metadata?.label or Items[recipe.name].label),
+		duration = recipe.duration or 3000,
+		canCancel = true,
+		disable = {
+			move = true,
+			combat = true,
+		},
+		anim = {
+			dict = recipe.anim?.dict or 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
+			clip = recipe.anim?.clip or 'machinic_loop_mechandplayer',
+		},
+		prop = recipe.prop or {}
+	})
+end)
+```
+
+**Step 3**
+Now head over to ox_inventory/modules/crafting/server.lua and find this function
+```lua filename="ox_inventory/modules/crafting/server.lua" copy
+function createCraftingBench
+```
+Now replace that function with this
+```lua filename="ox_inventory/modules/crafting/server.lua" copy
+local function createCraftingBench(id, data)
+	CraftingBenches[id] = {}
+	local recipes = data.items
+	local amount = recipes and #recipes or 0
+
+	if amount > 0 then
+		for i = 1, amount do
+			local recipe = recipes[i]
+			local item = Items(recipe.name)
+
+			if item then
+				recipe.weight = item.weight
+				recipe.slot = i
+			else
+				warn(('failed to setup crafting recipe (bench: %s, slot: %s) - item "%s" does not exist'):format(id, i, recipe.name))
+			end
+
+			for ingredient, needs in pairs(recipe.ingredients) do
+				if needs < 1 then
+					item = Items(ingredient)
+
+					if item and not item.durability then
+						item.durability = true
+					end
+				end
+			end
+		end
+
+		if shared.target then
+			data.points = nil
+		else
+			data.zones = nil
+		end
+
+		data.slots = amount
+
+		CraftingBenches[id] = data
+	end
+end
+
+exports('RegisterCraftStation', createCraftingBench)
+```
+
+**Step 4**
+Stay inside ox_inventory/modules/crafting/server.lua and find this event
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+lib.callback.register('ox_inventory:openCraftingBench', function(source, id, index)
+	local left, bench = Inventory(source), CraftingBenches[id]
+
+	if not left then return end
+
+	if bench then
+		local groups = bench.groups
+		local coords = getCraftingCoords(source, bench, index)
+
+		if not coords then return end
+
+		if groups and not server.hasGroup(left, groups) then return end
+		if #(GetEntityCoords(GetPlayerPed(source)) - coords) > 10 then return end
+
+		if left.open and left.open ~= source then
+			local inv = Inventory(left.open) --[[@as OxInventory]]
+
+			-- Why would the player inventory open with an invalid target? Can't repro but whatever.
+			if inv?.player then
+				inv:closeInventory()
+			end
+		end
+
+		left:openInventory(left)
+	end
+
+	return { label = left.label, type = left.type, slots = left.slots, weight = left.weight, maxWeight = left.maxWeight }
+end)
+```
+Then replace the event with the following code
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+lib.callback.register('ox_inventory:openCraftingBench', function(source, id, index)
+	local left, bench = Inventory(source), CraftingBenches[id]
+
+	if not left then return end
+
+	if bench then
+		local groups = bench.groups
+		local coords = getCraftingCoords(source, bench, index)
+
+		if not coords then return end
+
+		if groups and not server.hasGroup(left, groups) then return end
+		if #(GetEntityCoords(GetPlayerPed(source)) - coords) > 10 then return end
+
+		if left.open and left.open ~= source then
+			local inv = Inventory(left.open) --[[@as OxInventory]]
+
+			-- Why would the player inventory open with an invalid target? Can't repro but whatever.
+			if inv?.player then
+				inv:closeInventory()
+			end
+		end
+
+		left:openInventory(left)
+	end
+
+	return { label = left.label, type = left.type, slots = left.slots, weight = left.weight, maxWeight = left.maxWeight }, bench
+end)
+```
+
+**Step 5**
+In the same file (modules/crafting/server.lua) find the following event
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+local success = lib.callback.await('ox_inventory:startCrafting', source, id, recipeId)
+```
+Replace that event / code with this
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+local success = lib.callback.await('ox_inventory:startCrafting', source, recipe)
+```
+
+**Step 6**
+Head to ox_inventory/modules/utils/server.lua and at validHosts add this
+```lua filename="ox_inventory/modules/utils/server.lua" copy
+['i.ibb.com'] = true,
+```
+
+## QB Inventory items images changes
+**This is not 100% tested and might have some issues, we really recommend to use ox_inventory!!**
+(if find any issue please open ticket on our discord)
+
+Replace your qb-inventory/html/app.js file to this one (only for old qb-inventory)
+[Click to download the file]("https://drive.google.com/file/d/1BUedK8W6FoLCksUh9Q3DwFun_f_ajUxP/view?usp=sharing")
+
+Replace your qb-inventory/html/index.html file to this one (only for new qb-inventory)
+[Click to download the file]("https://drive.google.com/file/d/1RYAJ4XLORAEs7kFBN8DqkzM69EcRtGYl/view?usp=sharing")
+
+## QBCore/QBox jobs
+Add this to your qb-core/shared/jobs.lua or qbx_core/shared/jobs.lua (this is totally optional!)
+```lua filename="qbx_core/shared/jobs.lua" copy
+
+	beanmachine = {
+		label = 'Beanmachine',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	lsbeanmachine = {
+		label = 'Legion Square Beanmachine',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	coolbeans = {
+		label = 'Coolbeans',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	hawkerboys = {
+		label = 'The Hawker Boys',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	mpburgershot = {
+		label = 'Mirror Park Burgershot',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	ssburgershot = {
+		label = 'Sandy Shores Burgershot',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	vpburgershot = {
+		label = 'Vespucci Burgershot',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	lustresort = {
+		label = 'The Lust Resort',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	cafeday = {
+		label = 'Cafe Day',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	bwsaloon = {
+		label = 'Black Wood Saloon',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	rfclucking = {
+		label = 'Rockford Clucking Bell',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	vwupnatom = {
+		label = 'Vinewood Up-N-Atom',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	gsupnatom = {
+		label = 'Grapeseed Up-N-Atom',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	icentralbar = {
+		label = 'Italian Central Bar',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	rexdiner = {
+		label = 'Rex Diner',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	comedyclub = {
+		label = 'Comedy Club',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	malibuclub = {
+		label = 'Malibu Club',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	coffeeshop = {
+		label = 'Coffee Shop',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	wigman = {
+		label = 'Wigman Burger',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+	cafe = {
+		label = 'Café',
+		defaultDuty = false,
+		offDutyPay = false,
+		grades = {
+			['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+		},
+	},
+```
