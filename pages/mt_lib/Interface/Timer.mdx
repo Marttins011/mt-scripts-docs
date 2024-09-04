@@ -1,0 +1,28 @@
+# Key Text UI
+This is just a nice UI with a timer that executes an action when finished
+
+**Preview**
+![imagem](https://github.com/user-attachments/assets/9f615946-8236-40be-9a26-d5576ecb1f25)
+
+## Client exports
+**Show Timer**
+```lua copy
+---@param label string
+---@param time number
+---@param position string
+---@param onFinish function
+exports.mt_lib:showTimer(label, time, position, onFinish)
+```
+- label: `string`
+    - UI Label
+- time: `number`
+    - Timer time (in seconds)
+- position: `string`
+    - UI Position on screen: `left` | `right` | `bottom` | `top`
+- onFinish: `function`
+    - Function to execute when finishing the countdown
+
+**Hide Text UI**
+```lua copy
+exports.mt_lib:hideTextUI()
+```

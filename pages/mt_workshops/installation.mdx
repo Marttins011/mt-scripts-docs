@@ -1,0 +1,656 @@
+# This is the docs for the Workshops 2.0, the 1.0 is no longer updated!!
+
+## Vehicle properties changes (QBCore)
+
+Head over qb-core/client/functions.lua and replace the whole function
+```lua filename="qb-core/client/functions.lua" copy
+QBCore.Functions.GetVehicleProperties
+```
+With the function
+```lua filename="qb-core/client/functions.lua" copy
+function QBCore.Functions.GetVehicleProperties(vehicle)
+   return lib.getVehicleProperties(vehicle)
+end
+```
+
+And the whole function
+```lua filename="qb-core/client/functions.lua" copy
+QBCore.Functions.SetVehicleProperties
+```
+With the function
+```lua filename="qb-core/client/functions.lua" copy
+function QBCore.Functions.SetVehicleProperties(vehicle, mods)
+   return lib.setVehicleProperties(vehicle, mods)
+end
+```
+
+Also make sure to add the follwing line to the shared_scripts on the qb-core/fxmanifest.lua
+```lua filename="qb-core/fxmanifest.lua" copy
+'@ox_lib/init.lua',
+```
+
+After that make sure that the ox_lib is starting before qb-core and replace the ox_lib/resource/vehicleProperties/client.lua with this file
+
+[Click to download the file]("https://drive.google.com/file/d/1WjWyjQeT3DPHS8IHoRpsk5C9Nh9SR9eU/view?usp=sharing")
+
+## Vehicle properties changes (ESX)
+
+Head over es_extended/client/functions.lua and replace the whole function
+```lua filename="es_extended/client/functions.lua" copy
+ESX.Game.GetVehicleProperties
+```
+With the function
+```lua filename="es_extended/client/functions.lua" copy
+function ESX.Game.GetVehicleProperties(vehicle)
+    return lib.getVehicleProperties(vehicle)
+end
+```
+
+And the whole function
+```lua filename="es_extended/client/functions.lua" copy
+ESX.Game.SetVehicleProperties
+```
+With the function
+```lua filename="es_extended/client/functions.lua" copy
+function ESX.Game.SetVehicleProperties(vehicle, mods)
+    return lib.setVehicleProperties(vehicle, mods)
+end
+```
+
+Also make sure to add the follwing line to the shared_scripts on the es_extended/fxmanifest.lua
+```lua filename="es_extended/fxmanifest.lua" copy
+'@ox_lib/init.lua',
+```
+
+After that make sure that the ox_lib is starting before qb-core and replace the ox_lib/resource/vehicleProperties/client.lua with this file
+
+[Click to download the file]("https://drive.google.com/file/d/1WjWyjQeT3DPHS8IHoRpsk5C9Nh9SR9eU/view?usp=sharing")
+
+## Vehicle properties changes (QBox)
+
+Make sure that the ox_lib is starting before qb-core and replace the ox_lib/resource/vehicleProperties/client.lua with this file
+
+[Click to download the file]("https://drive.google.com/file/d/1WjWyjQeT3DPHS8IHoRpsk5C9Nh9SR9eU/view?usp=sharing")
+
+## Inventory items (OX Inventory)
+Copy and paste the following code at ox_inventory/data/items.lua
+```lua filename="ox_inventory/data/items.lua" copy
+["engine_s"] = {
+	label = "Engine S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["engine_a"] = {
+	label = "Engine A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["engine_b"] = {
+	label = "Engine B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["engine_c"] = {
+	label = "Engine C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["engine_d"] = {
+	label = "Engine D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["transmission_s"] = {
+	label = "Transmission S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["transmission_a"] = {
+	label = "Transmission A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["transmission_b"] = {
+	label = "Transmission B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["transmission_c"] = {
+	label = "Transmission C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["transmission_d"] = {
+	label = "Transmission D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["suspension_s"] = {
+	label = "Suspension S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["suspension_a"] = {
+	label = "Suspension A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["suspension_b"] = {
+	label = "Suspension B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["suspension_c"] = {
+	label = "Suspension C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["suspension_d"] = {
+	label = "Suspension D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["brake_s"] = {
+	label = "Brake S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["brake_a"] = {
+	label = "Brake A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["brake_b"] = {
+	label = "Brake B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["brake_c"] = {
+	label = "Brake C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["brake_d"] = {
+	label = "Brake D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["turbo_s"] = {
+	label = "Turbo S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["turbo_a"] = {
+	label = "Turbo A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["turbo_b"] = {
+	label = "Turbo B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["turbo_c"] = {
+	label = "Turbo C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["turbo_d"] = {
+	label = "Turbo D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["armour_s"] = {
+	label = "Armour S",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["armour_a"] = {
+	label = "Armour A",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["armour_b"] = {
+	label = "Armour B",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["armour_c"] = {
+	label = "Armour C",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["armour_d"] = {
+	label = "Armour D",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["engine_repair_kit"] = {
+	label = "Engine repair kit",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["body_repair_kit"] = {
+	label = "Body repair kit",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["cosmetics"] = {
+	label = "Cosmetics",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+["mechanic_toolbox"] = {
+	label = "Mechanics toolbox",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+	client = {
+		export = 'mt_workshops.openToolboxMenu'
+	}
+},
+["neons_controller"] = {
+	label = "Neons controller",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+	client = {
+		export = 'mt_workshops.openLightsController'
+	}
+},
+["mods_list"] = {
+	label = "Vehicle mods list",
+	weight = 0,
+	stack = true,
+	close = true,
+	description = "",
+	client = {
+		export = 'mt_workshops.openCosmeticsMenu'
+	}
+},
+["extras_controller"] = {
+	label = "Vehicle extras",
+	weight = 0,
+	stack = true,
+	close = true,
+	description = "",
+	client = {
+		export = 'mt_workshops.openExtrasMenu'
+	}
+},
+```
+
+## Inventory items (QBCore)
+Copy and paste the following code at qb-core/shared/items.lua
+```lua filename="qb-core/shared/items.lua" copy
+engine_s       = {name = 'engine_s', label = 'Engine Class S', weight = 1000, type = 'item', image = 'engine_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Engine Upgrade for Class S Vehicles'},
+engine_a       = {name = 'engine_a', label = 'Engine Class A', weight = 1000, type = 'item', image = 'engine_a.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Engine Upgrade for Class A Vehicles'},
+engine_b       = {name = 'engine_a', label = 'Engine Class B', weight = 1000, type = 'item', image = 'engine_b.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Engine Upgrade for Class B Vehicles'},
+engine_c       = {name = 'engine_a', label = 'Engine Class C', weight = 1000, type = 'item', image = 'engine_c.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Engine Upgrade for Class C Vehicles'},
+engine_d       = {name = 'engine_a', label = 'Engine Class D', weight = 1000, type = 'item', image = 'engine_d.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Engine Upgrade for Class D Vehicles'},
+
+transmission_s  = {name = 'transmission_s', label = 'Transmission Class S', weight = 1000, type = 'item', image = 'transmission_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Transmission Upgrade for Class S Vehicles'},
+transmission_a  = {name = 'transmission_a', label = 'Transmission Class A', weight = 1000, type = 'item', image = 'transmission_a.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Transmission Upgrade for Class A Vehicles'},
+transmission_b  = {name = 'transmission_b', label = 'Transmission Class B', weight = 1000, type = 'item', image = 'transmission_b.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Transmission Upgrade for Class B Vehicles'},
+transmission_c  = {name = 'transmission_c', label = 'Transmission Class C', weight = 1000, type = 'item', image = 'transmission_c.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Transmission Upgrade for Class C Vehicles'},
+transmission_d  = {name = 'transmission_d', label = 'Transmission Class D', weight = 1000, type = 'item', image = 'transmission_d.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Transmission Upgrade for Class D Vehicles'},
+
+suspension_s  = {name = 'suspension_s', label = 'Suspension Class S', weight = 1000, type = 'item', image = 'suspension_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Suspension Upgrade for Class S Vehicles'},
+suspension_a  = {name = 'suspension_a', label = 'Suspension Class A', weight = 1000, type = 'item', image = 'suspension_a.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Suspension Upgrade for Class A Vehicles'},
+suspension_b  = {name = 'suspension_b', label = 'Suspension Class B', weight = 1000, type = 'item', image = 'suspension_b.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Suspension Upgrade for Class B Vehicles'},
+suspension_c  = {name = 'suspension_c', label = 'Suspension Class C', weight = 1000, type = 'item', image = 'suspension_c.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Suspension Upgrade for Class C Vehicles'},
+suspension_d  = {name = 'suspension_d', label = 'Suspension Class D', weight = 1000, type = 'item', image = 'suspension_d.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Suspension Upgrade for Class D Vehicles'},
+
+brake_s       = {name = 'brake_s', label = 'Brakes Class S', weight = 1000, type = 'item', image = 'brake_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Brakes Upgrade for Class S Vehicles'},
+brake_a       = {name = 'brake_a', label = 'Brakes Class A', weight = 1000, type = 'item', image = 'brake_a.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Brakes Upgrade for Class A Vehicles'},
+brake_b       = {name = 'brake_b', label = 'Brakes Class B', weight = 1000, type = 'item', image = 'brake_b.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Brakes Upgrade for Class B Vehicles'},
+brake_c       = {name = 'brake_c', label = 'Brakes Class C', weight = 1000, type = 'item', image = 'brake_c.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Brakes Upgrade for Class C Vehicles'},
+brake_d       = {name = 'brake_d', label = 'Brakes Class D', weight = 1000, type = 'item', image = 'brake_d.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Brakes Upgrade for Class D Vehicles'},
+
+turbo_s       = {name = 'turbo_s', label = 'Turbo Class S', weight = 1000, type = 'item', image = 'turbo_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Turbo Upgrade for Class S Vehicles'},
+turbo_a       = {name = 'turbo_a', label = 'Turbo Class A', weight = 1000, type = 'item', image = 'turbo_A.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Turbo Upgrade for Class A Vehicles'},
+turbo_b       = {name = 'turbo_b', label = 'Turbo Class B', weight = 1000, type = 'item', image = 'turbo_B.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Turbo Upgrade for Class B Vehicles'},
+turbo_c       = {name = 'turbo_c', label = 'Turbo Class C', weight = 1000, type = 'item', image = 'turbo_C.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Turbo Upgrade for Class C Vehicles'},
+turbo_d       = {name = 'turbo_d', label = 'Turbo Class D', weight = 1000, type = 'item', image = 'turbo_D.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Turbo Upgrade for Class D Vehicles'},
+
+armour_s      = {name = 'armour_s', label = 'Armour Class S', weight = 1000, type = 'item', image = 'armour_s.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Armour Upgrade for Class S Vehicles'},
+armour_a      = {name = 'armour_a', label = 'Armour Class A', weight = 1000, type = 'item', image = 'armour_a.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Armour Upgrade for Class A Vehicles'},
+armour_b      = {name = 'armour_b', label = 'Armour Class B', weight = 1000, type = 'item', image = 'armour_b.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Armour Upgrade for Class B Vehicles'},
+armour_c      = {name = 'armour_c', label = 'Armour Class C', weight = 1000, type = 'item', image = 'armour_c.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Armour Upgrade for Class C Vehicles'},
+armour_d      = {name = 'armour_d', label = 'Armour Class D', weight = 1000, type = 'item', image = 'armour_d.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Armour Upgrade for Class D Vehicles'},
+
+engine_repair_kit   = {name = 'engine_repair_kit', label = 'Engine Repair Kit', weight = 1000, type = 'item', image = 'engine_repair_kit.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A Kit For Engine Repair'},
+body_repair_kit     = {name = 'body_repair_kit',   label = 'Body Repair Kit',   weight = 1000, type = 'item', image = 'body_repair_kit.png',   unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A Kit For Body Repair'},
+cosmetics           = {name = 'cosmetics',         label = 'Cosmetic Kit',      weight = 1000, type = 'item', image = 'cosmetics.png',         unique = false, useable = true, shouldClose = true, combinable = nil, description = 'For Car Cosmetic'},
+mechanic_toolbox    = {name = 'mechanic_toolbox',  label = 'Mechanic Tool Box', weight = 1000, type = 'item', image = 'mechanic_toolbox.png',  unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Mechanic Tool Box'},
+neons_controller    = {name = 'neons_controller',  label = 'Neon Controller',   weight = 1000, type = 'item', image = 'neons_controller.png',  unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Xenon & Neon Controller'},
+mods_list           = {name = 'mods_list',         label = 'Vehicle mods list', weight = 1000, type = 'item', image = 'mods_list.png',         unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Vehicle mods list'},    
+extras_controller   = {name = 'extras_controller', label = 'Vehicle extras',    weight = 1000, type = 'item', image = 'extras_controller.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'Vehicle extras controller'},    
+```
+
+## OX Inventory craft changes
+Here's some changes that you'll need to make at your inventory to make the craft system work integrated with the script (credits to Renewed Scripts for the changes!)
+
+**Step 1**
+Head over to ox_inventory/client.lua and search for this around line 175
+```lua filename="ox_inventory/cient.lua" copy
+'ox_inventory:openCraftingBench'
+```
+Now replace this
+```lua filename="ox_inventory/cient.lua" copy
+left = lib.callback.await('ox_inventory:openCraftingBench', 200, data.id, data.index)
+
+if left then
+	right = CraftingBenches[data.id]
+
+	if not right?.items then return end
+
+	local coords, distance
+
+	if not right.zones and not right.points then
+		coords = GetEntityCoords(cache.ped)
+		distance = 2
+	else
+		coords = shared.target == 'ox_target' and right.zones and right.zones[data.index].coords or right.points and right.points[data.index]
+		distance = coords and shared.target == 'ox_target' and right.zones[data.index].distance or 2
+	end
+
+	right = {
+		type = 'crafting',
+		id = data.id,
+		label = right.label or locale('crafting_bench'),
+		index = data.index,
+		slots = right.slots,
+		items = right.items,
+		coords = coords,
+		distance = distance
+	}
+end
+```
+with this
+```lua filename="ox_inventory/cient.lua" copy
+left, right = lib.callback.await('ox_inventory:openCraftingBench', 200, data.id, data.index)
+
+if left and right then
+	if not right?.items then return end
+
+	local coords, distance
+
+	if not right.zones and not right.points then
+		coords = GetEntityCoords(cache.ped)
+		distance = 2
+	else
+		coords = shared.target == 'ox_target' and right.zones and right.zones[data.index].coords or right.points and right.points[data.index]
+		distance = coords and shared.target == 'ox_target' and right.zones[data.index].distance or 2
+	end
+
+	right = {
+		type = 'crafting',
+		id = data.id,
+		label = right.label or locale('crafting_bench'),
+		index = data.index,
+		slots = right.slots,
+		items = right.items,
+		coords = coords,
+		distance = distance
+	}
+end
+```
+
+**Step 2**
+Remain in ox_inventory/client.lua and search for the following around line 1630
+```lua filename="ox_inventory/client.lua" copy
+'ox_inventory:startCrafting'
+```
+Here you want to replace this
+```lua filename="ox_inventory/client.lua" copy
+lib.callback.register('ox_inventory:startCrafting', function(id, recipe)
+	recipe = CraftingBenches[id].items[recipe]
+
+	return lib.progressCircle({
+		label = locale('crafting_item', recipe.metadata?.label or Items[recipe.name].label),
+		duration = recipe.duration or 3000,
+		canCancel = true,
+		disable = {
+			move = true,
+			combat = true,
+		},
+		anim = {
+			dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
+			clip = 'machinic_loop_mechandplayer',
+		}
+	})
+end)
+```
+With this
+```lua filename="ox_inventory/client.lua" copy
+lib.callback.register('ox_inventory:startCrafting', function(recipe)
+	return lib.progressCircle({
+		label = locale('crafting_item', recipe.metadata?.label or Items[recipe.name].label),
+		duration = recipe.duration or 3000,
+		canCancel = true,
+		disable = {
+			move = true,
+			combat = true,
+		},
+		anim = {
+			dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
+			clip = 'machinic_loop_mechandplayer',
+		}
+	})
+end)
+```
+
+**Step 3**
+Now head over to ox_inventory/modules/crafting/server.lua and find this function
+```lua filename="ox_inventory/modules/crafting/server.lua" copy
+function createCraftingBench
+```
+Now replace that function with this
+```lua filename="ox_inventory/modules/crafting/server.lua" copy
+local function createCraftingBench(id, data)
+	CraftingBenches[id] = {}
+	local recipes = data.items
+	local amount = recipes and #recipes or 0
+
+	if amount > 0 then
+		for i = 1, amount do
+			local recipe = recipes[i]
+			local item = Items(recipe.name)
+
+			if item then
+				recipe.weight = item.weight
+				recipe.slot = i
+			else
+				warn(('failed to setup crafting recipe (bench: %s, slot: %s) - item "%s" does not exist'):format(id, i, recipe.name))
+			end
+
+			for ingredient, needs in pairs(recipe.ingredients) do
+				if needs < 1 then
+					item = Items(ingredient)
+
+					if item and not item.durability then
+						item.durability = true
+					end
+				end
+			end
+		end
+
+		if shared.target then
+			data.points = nil
+		else
+			data.zones = nil
+		end
+
+		data.slots = amount
+
+		CraftingBenches[id] = data
+	end
+end
+
+exports('RegisterCraftStation', createCraftingBench)
+```
+
+**Step 4**
+Stay inside ox_inventory/modules/crafting/server.lua and find this event
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+lib.callback.register('ox_inventory:openCraftingBench', function(source, id, index)
+	local left, bench = Inventory(source), CraftingBenches[id]
+
+	if not left then return end
+
+	if bench then
+		local groups = bench.groups
+		local coords = getCraftingCoords(source, bench, index)
+
+		if not coords then return end
+
+		if groups and not server.hasGroup(left, groups) then return end
+		if #(GetEntityCoords(GetPlayerPed(source)) - coords) > 10 then return end
+
+		if left.open and left.open ~= source then
+			local inv = Inventory(left.open) --[[@as OxInventory]]
+
+			-- Why would the player inventory open with an invalid target? Can't repro but whatever.
+			if inv?.player then
+				inv:closeInventory()
+			end
+		end
+
+		left:openInventory(left)
+	end
+
+	return { label = left.label, type = left.type, slots = left.slots, weight = left.weight, maxWeight = left.maxWeight }
+end)
+```
+Then replace the event with the following code
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+lib.callback.register('ox_inventory:openCraftingBench', function(source, id, index)
+	local left, bench = Inventory(source), CraftingBenches[id]
+
+	if not left then return end
+
+	if bench then
+		local groups = bench.groups
+		local coords = getCraftingCoords(source, bench, index)
+
+		if not coords then return end
+
+		if groups and not server.hasGroup(left, groups) then return end
+		if #(GetEntityCoords(GetPlayerPed(source)) - coords) > 10 then return end
+
+		if left.open and left.open ~= source then
+			local inv = Inventory(left.open) --[[@as OxInventory]]
+
+			-- Why would the player inventory open with an invalid target? Can't repro but whatever.
+			if inv?.player then
+				inv:closeInventory()
+			end
+		end
+
+		left:openInventory(left)
+	end
+
+	return { label = left.label, type = left.type, slots = left.slots, weight = left.weight, maxWeight = left.maxWeight }, bench
+end)
+```
+
+**Step 5**
+In the same file (modules/crafting/server.lua) find the following event
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+local success = lib.callback.await('ox_inventory:startCrafting', source, id, recipeId)
+```
+Replace that event / code with this
+```lua filename="ox_inventory/modules/craftting/server.lua" copy
+local success = lib.callback.await('ox_inventory:startCrafting', source, recipe)
+```
+
+## Add vehicle classes (QBCore or QBox)
+At qb-core/shared/vehicles.lua you'll need to add the following code to **ALL** of your vehicles with the correct class that you want that vehicle to use
+```lua filename="qb-core/shared/vehicles.lua" copy
+class = 'A',
+```
+That should look like this (just an example)
+```lua
+brioso = {
+    name = 'Brioso R/A',
+    brand = 'Grotti',
+    model = 'brioso',
+    price = 50000,
+    category = 'compacts',
+    categoryLabel = 'Compacts',
+    hash = 'brioso',
+    class = 'A',
+    shop = 'pdm',
+},
+```
+
+**Once completed you have now successfully installed mt-workshops! 😃**

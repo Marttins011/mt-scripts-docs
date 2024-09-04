@@ -1,0 +1,1392 @@
+## Main
+This is the main config of the script
+```lua filename="mt_workshops/configs/config.lua"
+Config = Config or {}
+
+Config.framework = 'qbx' -- qb, qbx, esx (need to change the export on the Config.core)
+Config.core = exports['qb-core']:GetCoreObject() -- core export (for qb is exports['qb-core']:GetCoreObject()) (for esx is exports.es_extended:getSharedObject()) (for qbx you can just delete this line and add '@qbx_core/modules/playerdata.lua', to the fxmanifest.lua client_scripts)
+Config.inventory = 'ox_inventory' -- ox_inventory, qb-inventory, qb-inventory-old, ... (Remember that only with ox_inventory you'll have the best usage of all script features!!)
+Config.target = 'ox_target' -- ox_target, qb-target, interact, ...
+Config.keys = 'Renewed-Vehiclekeys' -- qb-vehiclekesy, Renewed-Vehiclekeys, qbx_vehiclekeys, ... (can change at server/functions.lua)
+Config.banking = 'Renewed-Banking' -- qb-banking, Renewed-Banking, ... (can change at server/functions.lua)
+
+Config.locale = 'en' -- this is the locales that'll show on the script UI
+
+Config.inventoryDirectory = 'ox_inventory/web/images/'
+
+Config.debug = false -- if true it'll print some debug on F8/console and active all zones debug
+
+Config.useOxInventoryCraft = true -- if true it'll use the ox_inventory crafting system on all crafts (only for ox_invntory, check docs for that)
+
+Config.givePerformanceItems = true -- if true it'll give the performance installed items back when removing it
+
+Config.toggleDutyZones = true -- if true the players duty will toggle when then join the zone
+
+Config.useClasses = true -- if false it'll ignore the vehicle classes, make sure the update the configs/performance.lua to fix the multiple performance parts
+Config.useQBSharedClasses = true -- if true it'll use the qb-core/shared/vehicles.lua file to get the added classes if false the vehicle and the class needs to be added to the configs/classes.lua
+Config.classesCommand = 'class'
+
+Config.times = {
+    repairEngine = 5000,
+    repairBody = 5000,
+    repairTank = 5000,
+    wash = 5000,
+    installingMod = 5000,
+    removingMod = 5000,
+    installingCosmetic = 5000,
+    askMission = 5000
+}
+
+Config.repairItems = {
+    engine = { count = 1, item = 'metalscrap' },
+    body = { count = 1, item = 'iron' },
+    tank = { count = 1, item = 'plastic' },
+}
+
+Config.preview = {
+    command = 'preview',
+    lockJob = true
+}
+```
+
+## Classes
+This is where you'll add the vehicles classes if you don't use the QBShared.Vehicles
+```lua filename="mt_workshops/configs/classes.lua"
+Config = Config or {}
+
+Config.vehicleClasses = {
+    sultan = 'A'
+}
+```
+
+## Cosmetics
+This is where you'll find all the cosmetics tables, only advisable to translate and don't change anything more!
+```lua filename="mt_worskhops/configs/cosmetics.lua"
+Config = Config or {}
+
+Config.cosmetics = { -- Only remove options and change options values, don't add any and don't change the value!
+    { label = 'Paints', value = 'paints' }, -- I advice to place this at first for a better organization
+    { label = 'Wheels', value = 23, modsId = 'modFrontWheels' }, -- I advice to place this at first for a better organization
+    { label = 'Rear Wheels', value = 24, modsId = 'modBackWheels' },
+    { label = 'Spoiler', value = 0, modsId = 'modSpoilers' },
+    { label = 'Front Bumper', value = 1, modsId = 'modFrontBumper' },
+    { label = 'Rear Bumper', value = 2, modsId = 'modRearBumper' },
+    { label = 'Skirt', value = 3, modsId = 'modSideSkirt' },
+    { label = 'Exhaust', value = 4, modsId = 'modExhaust' },
+    { label = 'Frame', value = 5, modsId = 'modFrame' },
+    { label = 'Grill', value = 6, modsId = 'modGrille' },
+    { label = 'Bonnet', value = 7, modsId = 'modHood' },
+    { label = 'Left Wing', value = 8, modsId = 'modFender' },
+    { label = 'Right Wing', value = 9, modsId = 'modRightFender' },
+    { label = 'Roof', value = 10, modsId = 'modRoof' },
+    { label = 'Horn', value = 14, modsId = 'modSideSkirt' },
+    { label = 'Subwoofer', value = 19, modsId = 'modSubwoofer' },
+    { label = 'Plate Holder', value = 25, modsId = 'modPlateHolder' },
+    { label = 'Vanity Plate', value = 26, modsId = 'modVanityPlate' },
+    { label = 'Trim A', value = 27, modsId = 'modTrimA' },
+    { label = 'Ornaments', value = 28, modsId = 'modOrnaments' },
+    { label = 'Dashboard', value = 29, modsId = 'modDashboard' },
+    { label = 'Dial', value = 30, modsId = 'modDial' },
+    { label = 'Door speakers', value = 31, modsId = 'modDoorSpeaker' },
+    { label = 'Seats', value = 32, modsId = 'modSeats' },
+    { label = 'Steering wheel', value = 33, modsId = 'modSteeringWheel' },
+    { label = 'Shifter leavers', value = 34, modsId = 'modShifterLeavers' },
+    { label = 'A Plate', value = 35, modsId = 'modAPlate' },
+    { label = 'Speakers', value = 36, modsId = 'modSpeakers' },
+    { label = 'Trunk', value = 37, modsId = 'modTrunk' },
+    { label = 'Hydrolic', value = 38, modsId = 'modHydrolic' },
+    { label = 'Engine block', value = 39, modsId = 'modEngineBlock' },
+    { label = 'Air filter', value = 40, modsId = 'modAirFilter' },
+    { label = 'Struts', value = 41, modsId = 'modStruts' },
+    { label = 'Arch cover', value = 42, modsId = 'modArchCover' },
+    { label = 'Aerials', value = 43, modsId = 'modAerials' },
+    { label = 'Trim B', value = 44, modsId = 'modTrimB' },
+    { label = 'Tank', value = 45, modsId = 'modTank' },
+    { label = 'Windows', value = 46, modsId = 'modWindows' },
+    { label = 'Door R', value = 47, modsId = 'modDoorR' },
+    { label = 'Livery', value = 48, modsId = 'modLivery' },
+    { label = 'Lightbar', value = 49, modsId = 'modLightbar' },
+    { label = 'Window Tint', value = 'windowTint', modsId = 'windowTint' },
+    { label = 'Plates', value = 'plates', modsId = 'plateIndex' },
+}
+
+Config.rimsCategory = { -- Only remove options and change options values and don't change the value!
+    { label = 'Sport', value = 0 }, -- The price must be the same as the wheels price at Config.Cosmetics
+    { label = 'Muscle', value = 1 },
+    { label = 'Lowrvalueer', value = 2 },
+    { label = 'SUV', value = 3 },
+    { label = 'OffRoad', value = 4 },
+    { label = 'Tuner', value = 5 },
+    { label = 'Bike', value = 6 },
+    { label = 'High End', value = 7 },
+    { label = "Benny's Orignal", value = 8 },
+    { label = "Benny's Bespoke", value = 9 },
+    { label = "Open Wheel", value = 10 },
+    { label = 'Street', value = 11 },
+    { label = 'Track', value = 12 },
+}
+
+Config.horns = {
+    { label = 'Stock', value = -1 },
+    { label = 'Truck Horn', value = 0 },
+    { label = 'Cop Horn', value = 1 },
+    { label = 'Clown Horn', value = 2 },
+    { label = 'Musical Horn 1', value = 3 },
+    { label = 'Musical Horn 2', value = 4 },
+    { label = 'Musical Horn 3', value = 5 },
+    { label = 'Musical Horn 4', value = 6 },
+    { label = 'Musical Horn 5', value = 7 },
+    { label = 'Sad Trombone', value = 8 },
+    { label = 'Classical Horn 1', value = 9 },
+    { label = 'Classical Horn 2', value = 10 },
+    { label = 'Classical Horn 3', value = 11 },
+    { label = 'Classical Horn 4', value = 12 },
+    { label = 'Classical Horn 5', value = 13 },
+    { label = 'Classical Horn 6', value = 14 },
+    { label = 'Classical Horn 7', value = 15 },
+    { label = 'Scale - Do', value = 16 },
+    { label = 'Scale - Re', value = 17 },
+    { label = 'Scale - Mi', value = 18 },
+    { label = 'Scale - Fa', value = 19 },
+    { label = 'Scale - Sol', value = 20 },
+    { label = 'Scale - La', value = 21 },
+    { label = 'Scale - Ti', value = 22 },
+    { label = 'Scale - Do', value = 23 },
+    { label = 'Jazz Horn 1', value = 24 },
+    { label = 'Jazz Horn 2', value = 25 },
+    { label = 'Jazz Horn 3', value = 26 },
+    { label = 'Jazz Horn Loop', value = 27 },
+    { label = 'Star Spangled Banner 1', value = 28 },
+    { label = 'Star Spangled Banner 2', value = 29 },
+    { label = 'Star Spangled Banner 3', value = 30 },
+    { label = 'Star Spangled Banner 4', value = 31 },
+    { label = 'Classical Horn 8 Loop', value = 32 },
+    { label = 'Classical Horn 9 Loop', value = 33 },
+    { label = 'Classical Horn 10 Loop', value = 34 },
+    { label = 'Classical Horn 8', value = 35 },
+    { label = 'Classical Horn 9', value = 36 },
+    { label = 'Classical Horn 10', value = 37 },
+    { label = 'Funeral Loop', value = 38 },
+    { label = 'Funeral', value = 39 },
+    { label = 'Spooky Loop', value = 40 },
+    { label = 'Spooky', value = 41 },
+    { label = 'San Andreas Loop', value = 42 },
+    { label = 'San Andreas', value = 43 },
+    { label = 'Liberty City Loop', value = 44 },
+    { label = 'Liberty City', value = 45 },
+    { label = 'Festive 1 Loop', value = 46 },
+    { label = 'Festive 1', value = 47 },
+    { label = 'Festive 2 Loop', value = 48 },
+    { label = 'Festive 2', value = 49 },
+    { label = 'Festive 3 Loop', value = 50 },
+    { label = 'Festive 3', value = 51 },
+}
+
+Config.paintsCategory = { -- Only remove options and change options values, don't add any and don't change the value!
+    { label = 'Primary Color', value = 'primary', modsId = 'color1' },
+    { label = 'Secondary Color', value = 'secoundary', modsId = 'color2' },
+    { label = 'Pearl Color', value = 'pearl', modsId = 'pearlescentColor' },
+    { label = 'Wheels Color', value = 'wheels', modsId = 'wheelColor' },
+    { label = 'Interior Color', value = 'interior', modsId = 'interiorColor' },
+    { label = 'Dashboard Color', value = 'dashboard', modsId = 'dashboardColor' }
+}
+
+Config.paintsTypes = {
+    { label = 'Metalic', value = 'metalic' },
+    { label = 'Matte', value = 'matte' },
+    { label = 'Metals', value = 'metals' },
+    { label = 'Chameleon', value = 'chameleon' },
+}
+
+Config.paints = {
+    metalic = {
+        { label = 'Black', value = 0 },
+        { label = 'Carbon Black', value = 147 },
+        { label = 'Graphite', value = 1 },
+        { label = 'Anhracite Black', value = 11 },
+        { label = 'Black Steel', value = 2 },
+        { label = 'Dark Steel', value = 3 },
+        { label = 'Silver', value = 4 },
+        { label = 'Bluish Silver', value = 5 },
+        { label = 'Rolled Steel', value = 6 },
+        { label = 'Shadow Silver', value = 7 },
+        { label = 'Stone Silver', value = 8 },
+        { label = 'Mvaluenight Silver', value = 9 },
+        { label = 'Cast Iron Silver', value = 10 },
+        { label = 'Red', value = 27 },
+        { label = 'Torino Red', value = 28 },
+        { label = 'Formula Red', value = 29 },
+        { label = 'Lava Red', value = 150 },
+        { label = 'Blaze Red', value = 30 },
+        { label = 'Grace Red', value = 31 },
+        { label = 'Garnet Red', value = 32 },
+        { label = 'Sunset Red', value = 33 },
+        { label = 'Cabernet Red', value = 34 },
+        { label = 'Wine Red', value = 143 },
+        { label = 'Candy Red', value = 35 },
+        { label = 'Hot Pink', value = 135 },
+        { label = 'Pfsiter Pink', value = 137 },
+        { label = 'Salmon Pink', value = 136 },
+        { label = 'Sunrise Orange', value = 36 },
+        { label = 'Orange', value = 38 },
+        { label = 'Bright Orange', value = 138 },
+        { label = 'Gold', value = 99 },
+        { label = 'Bronze', value = 90 },
+        { label = 'Yellow', value = 88 },
+        { label = 'Race Yellow', value = 89 },
+        { label = 'Dew Yellow', value = 91 },
+        { label = 'Dark Green', value = 49 },
+        { label = 'Racing Green', value = 50 },
+        { label = 'Sea Green', value = 51 },
+        { label = 'Olive Green', value = 52 },
+        { label = 'Bright Green', value = 53 },
+        { label = 'Gasoline Green', value = 54 },
+        { label = 'Lime Green', value = 92 },
+        { label = 'Mvaluenight Blue', value = 141 },
+        { label = 'Galaxy Blue', value = 61 },
+        { label = 'Dark Blue', value = 62 },
+        { label = 'Saxon Blue', value = 63 },
+        { label = 'Blue', value = 64 },
+        { label = 'Mariner Blue', value = 65 },
+        { label = 'Harbor Blue', value = 66 },
+        { label = 'Diamond Blue', value = 67 },
+        { label = 'Surf Blue', value = 68 },
+        { label = 'Nautical Blue', value = 69 },
+        { label = 'Racing Blue', value = 73 },
+        { label = 'Ultra Blue', value = 70 },
+        { label = 'Light Blue', value = 74 },
+        { label = 'Chocolate Brown', value = 96 },
+        { label = 'Bison Brown', value = 101 },
+        { label = 'Creeen Brown', value = 95 },
+        { label = 'Feltzer Brown', value = 94 },
+        { label = 'Maple Brown', value = 97 },
+        { label = 'Beechwood Brown', value = 103 },
+        { label = 'Sienna Brown', value = 104 },
+        { label = 'Saddle Brown', value = 98 },
+        { label = 'Moss Brown', value = 100 },
+        { label = 'Woodbeech Brown', value = 102 },
+        { label = 'Straw Brown', value = 99 },
+        { label = 'Sandy Brown', value = 105 },
+        { label = 'Bleached Brown', value = 106 },
+        { label = 'Schafter Purple', value = 71 },
+        { label = 'Spinnaker Purple', value = 72 },
+        { label = 'Mvaluenight Purple', value = 142 },
+        { label = 'Bright Purple', value = 145 },
+        { label = 'Cream', value = 107 },
+        { label = 'Ice White', value = 111 },
+        { label = 'Frost White', value = 112 },
+    },
+    matte = {
+        { label = 'Black', value = 12 },  
+        { label = 'Gray', value = 13 },  
+        { label = 'Light Gray', value = 14 }, 
+        { label = 'Ice White', value = 131 },
+        { label = 'Blue', value = 83 }, 
+        { label = 'Dark Blue', value = 82 },
+        { label = 'Mvaluenight Blue', value = 84 },
+        { label = 'Mvaluenight Purple', value = 149 },
+        { label = 'Schafter Purple', value = 148 },
+        { label = 'Red', value = 39 },
+        { label = 'Dark Red', value = 40 },
+        { label = 'Orange', value = 41 },
+        { label = 'Yellow', value = 42 },
+        { label = 'Lime Green', value = 55 },
+        { label = 'Green', value = 128 },
+        { label = 'Forest Green', value = 151 },
+        { label = 'Foliage Green', value = 155 },
+        { label = 'Olive Darb', value = 152 },
+        { label = 'Dark Earth', value = 153 },
+        { label = 'Desert Tan', value = 154 },
+    },
+    metals = {
+        { label = 'Brushed Steel', value = 117 },
+        { label = 'Brushed Black Steel', value = 118 },
+        { label = 'Brushed Aluminum', value = 119 },
+        { label = 'Pure Gold', value = 158 },
+        { label = 'Brushed Gold', value = 159 },
+    },
+    chameleon = { -- (Colors Credits to https://www.gta5-mods.com/misc/Camaliao-paint-add-on)
+        { label = 'Anod Red', value = 161 },
+        { label = 'Anod Wine', value = 162 },
+        { label = 'Anod Purple', value = 163 },
+        { label = 'Anod Blue', value = 164 },
+        { label = 'Anod Green', value = 165 },
+        { label = 'Anod Lime', value = 166 },
+        { label = 'Anod Copper', value = 167 },
+        { label = 'Anod Bronze', value = 168 },
+        { label = 'Anod Champagne', value = 169 },
+        { label = 'Anod Gold', value = 170 },
+        { label = 'Green Blue Flip', value = 171 },
+        { label = 'Green Red Flip', value = 172 },
+        { label = 'Green Brow Flip', value = 173 },
+        { label = 'Green Turq Flip', value = 174 },
+        { label = 'Green Purp Flip', value = 175 },
+        { label = 'Teal Red Flip', value = 176 },
+        { label = 'Turq Red Flip', value = 177 },
+        { label = 'Turq Purp Flip', value = 178 },
+        { label = 'Cyan Puro Flip', value = 179 },
+        { label = 'Blue Pink Flip', value = 180 },
+        { label = 'Blue Green Flip', value = 181 },
+        { label = 'Purp Red Flip', value = 182 },
+        { label = 'Purp Green Flip', value = 183 },
+        { label = 'Magen Gree Flip', value = 184 },
+        { label = 'Magen Yell Flip', value = 185 },
+        { label = 'Burg Green Flip', value = 186 },
+        { label = 'Magen Cyan Flip', value = 187 },
+        { label = 'Coppe Purp Flip', value = 188 },
+        { label = 'Magen Orange Flip', value = 189 },
+        { label = 'Red Orange Flip', value = 190 },
+        { label = 'Orange Purp Flip', value = 191 },
+        { label = 'Orange Blue Flip', value = 192 },
+        { label = 'White Purp Flip', value = 193 },
+        { label = 'Red Rainbow Flip', value = 194 },
+        { label = 'Blue Rainbow Flip', value = 195 },
+        { label = 'Dark Green Pearl', value = 196 },
+        { label = 'Dark Teal Pearl', value = 197 },
+        { label = 'Dark Blue Pearl', value = 198 },
+        { label = 'Dar Purple Pearl', value = 199 },
+        { label = 'Oil Slick Pearl', value = 200 },
+        { label = 'Lit Green Pearl', value = 201 },
+        { label = 'Lit Blue Pearl', value = 202 },
+        { label = 'Lit Purp Pearl', value = 203 },
+        { label = 'Lit Pink Pearl', value = 204 },
+        { label = 'Offwhite Prisma', value = 205 },
+        { label = 'Pink Pearl', value = 206 },
+        { label = 'Yellow Pearl', value = 207 },
+        { label = 'Green Pearl', value = 208 },
+        { label = 'Blue Pearl', value = 209 },
+        { label = 'Cream Pearl', value = 210 },
+        { label = 'White Prisma', value = 211 },
+        { label = 'Graphite Prisma', value = 212 },
+        { label = 'Dark Blue Prisma', value = 213 },
+        { label = 'Dark Purple Prisma', value = 214 },
+        { label = 'Hot Pink Prisma', value = 215 },
+        { label = 'Red Prisma', value = 216 },
+        { label = 'Green Prisma', value = 217 },
+        { label = 'Black Prisma', value = 218 },
+        { label = 'Oil Slic Prisma', value = 219 },
+        { label = 'Rainbow Prisma', value = 220 },
+        { label = 'Black Holo', value = 221 },
+        { label = 'White Holo', value = 222 },
+    }
+}
+
+Config.plates = {
+    { label = 'Blue on White', value = 0 },
+    { label = 'Yellow on Black', value = 1 },
+    { label = 'Yellow on Blue', value = 2 },
+    { label = 'Blue on White 2', value = 3 },
+    { label = 'Blue on White 3', value = 4 },
+    { label = 'Yankton', value = 5 },
+}
+
+Config.windowTint = {
+    { label = 'Stock', value = 0 },
+    { label = 'Pure black', value = 1 },
+    { label = 'Dark Smoke', value = 2 },
+    { label = 'Light Smoke', value = 3 },
+    { label = 'Limo', value = 4 },
+    { label = 'Green', value = 5 },
+}
+
+Config.neonsColors = {
+    "rgb(2, 21, 255)",
+    "rgb(15, 3, 255)",
+    "rgb(35, 1, 255)",
+    "rgb(3, 83, 255)",
+    "rgb(0, 222, 140)",
+    "rgb(94, 255, 1)",
+    "rgb(255, 0, 0)",
+    "rgb(255, 5, 190)",
+    "rgb(255, 50, 100)",
+    "rgb(255, 62, 0)",
+    "rgb(255, 62, 0)",
+    "rgb(255, 221, 0)",
+    "rgb(255, 255, 255)"
+}
+```
+
+## Crafts
+This is where you'll be able to add, remove or edit the craft items
+```lua filename="mt_workshops/configs/crafts.lua"
+Config = Config or {}
+
+Config.crafts = {
+    performance = {
+        categoryLabel = 'Performance',
+        items = {
+            -- Engines
+            {
+                name = 'engine_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'engine_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'engine_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'engine_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'engine_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+
+            -- Transmissions
+            {
+                name = 'transmission_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'transmission_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'transmission_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'transmission_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'transmission_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+
+            -- Brakes
+            {
+                name = 'brake_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'brake_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'brake_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'brake_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'brake_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+
+            -- Suspensions
+            {
+                name = 'suspension_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'suspension_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'suspension_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'suspension_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'suspension_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+
+            -- Armours
+            {
+                name = 'armour_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'armour_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'armour_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'armour_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'armour_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+
+            -- Turbos
+            {
+                name = 'turbo_s',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'turbo_a',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'turbo_b',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'turbo_c',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'turbo_d',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+        }
+    },
+    others = {
+        categoryLabel = 'Others',
+        items = {
+            {
+                name = 'cosmetics',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'neons_controller',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'engine_repair_kit',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'body_repair_kit',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+            {
+                name = 'mechanic_toolbox',
+                ingredients = {
+                    plastic = 30,
+                    copper = 30,
+                    metalscrap = 30,
+                },
+                duration = 5000,
+                count = 1
+            },
+        }
+    },
+}
+```
+
+## Labels entry
+This is where you'll be able to add the mods entries like vehicles mods parts and vehicle rims labels
+```lua filename="mt_workshops/configs/labelEntry.lua"
+Config = Config or {}
+
+-- This is where you should add the labels to the custom mods like wheels or even addon vehicles mods
+
+Config.labelEntry = {
+    -- https://www.gta5-mods.com/vehicles/lore-friendly-sports-wheels-pack-lfswp-add-on-lods
+    { hash = '0x00EC3CDD', label = 'Spada Cut CL' },
+    { hash = '0x014DCDE0', label = 'Machismo SE' },
+    { hash = '0x03C11F02', label = 'GroundRide' },
+    { hash = '0x044F1749', label = 'GT One C' },
+    { hash = '0x089C3468', label = 'Split Star CL' },
+    { hash = '0x0ADEC009', label = 'Driftmeister CL' },
+    { hash = '0x0B492BD2', label = 'Ultra Mesh' },
+    { hash = '0x0CB243C3', label = 'FiftyNine C' },
+    { hash = '0x0D0E5641', label = 'AeroShield CL' },
+    { hash = '0x0E06338C', label = 'Uzer' },
+    { hash = '0x0EFF18F4', label = 'Cosmo SS' },
+    { hash = '0x0F73B2BF', label = 'Ruff Weld' },
+    { hash = '0x1A05485F', label = 'Panopticon CL' },
+    { hash = '0x1A66C8A5', label = 'Endo v.2' },
+    { hash = '0x1DFFE65E', label = 'Mercie C' },
+    { hash = '0x1F2CD5D9', label = 'Duper 7' },
+    { hash = '0x1F1853A5', label = 'Ruff Weld Mega Deep CL' },
+    { hash = '0x1FDB7BDB', label = 'AeroShield Accent' },
+    { hash = '0x2C996D0A', label = 'Super Five' },
+    { hash = '0x2CE0EF29', label = 'Deep Five CL' },
+    { hash = '0x2FE292A4', label = 'Mercie CL' },
+    { hash = '0x3DB08F40', label = 'Panopticon' },
+    { hash = '0x3F9A0A36', label = 'Split Six C' },
+    { hash = '0x4C985AD8', label = 'Ruff Weld CL' },
+    { hash = '0x4E3F1BF5', label = 'Machismo' },
+    { hash = '0x4E6127C4', label = 'Endo v.2  C' },
+    { hash = '0x4F7FB2DE', label = 'Ruff Weld Mega Deep' },
+    { hash = '0x5A3C6677', label = 'Synthetic Z CL' },
+    { hash = '0x5F8AD454', label = 'Cheetah RR' },
+    { hash = '0x6B5D098C', label = 'Mercie Accent' },
+    { hash = '0x6B555574', label = 'Superfresh C' },
+    { hash = '0x6E7AE5C4', label = 'LozSpeed Mk.V CA' },
+    { hash = '0x7D27AD21', label = 'Mercie SE' },
+    { hash = '0x7D1778F8', label = 'Cheetah RR C' },
+    { hash = '0x7DCB0F98', label = 'Venum' },
+    { hash = '0x8A62BF0F', label = 'Driftmeister SE' },
+    { hash = '0x8BF41C85', label = 'Double Impact C' },
+    { hash = '0x8C12954F', label = 'Feroci RR CL' },
+    { hash = '0x8F4B3298', label = 'S Racer' },
+    { hash = '0x8F5942A3', label = 'FiftyNine' },
+    { hash = '0x8FBB1E3F', label = 'Ultra Mesh C' },
+    { hash = '0x9B386322', label = 'Cosmo MKII SE' },
+    { hash = '0x9C52474D', label = 'Venum C' },
+    { hash = '0x9E866769', label = 'Chrono C' },
+    { hash = '0x20D45053', label = 'Uzer C' },
+    { hash = '0x21A1EA4F', label = 'Cheetah RR CL' },
+    { hash = '0x22E1076A', label = 'Ruff Weld SE' },
+    { hash = '0x27E25592', label = 'Endo v.1 CL' },
+    { hash = '0x27F6E52D', label = 'Sports Monoblock' },
+    { hash = '0x29A84EEE', label = 'Venum CL' },
+    { hash = '0x35D811DF', label = 'Superfresh CL' },
+    { hash = '0x38AF955D', label = 'LozSpeed Mk.V' },
+    { hash = '0x43D49078', label = 'LozSpeed Mk.V SE' },
+    { hash = '0x58AA2C49', label = 'Cosmo SE' },
+    { hash = '0x65B0DF38', label = 'Spada Cut' },
+    { hash = '0x66A0D847', label = 'Ruff Weld Mega Deep C' },
+    { hash = '0x75F918A4', label = 'Cosmo MKII SS' },
+    { hash = '0x76AFEB74', label = 'Dash VIP CL' },
+    { hash = '0x88D73C0B', label = 'Feroci RR C' },
+    { hash = '0x90E34E78', label = 'Cosmo MKII CL' },
+    { hash = '0x131DB4E6', label = 'GroundRide C' },
+    { hash = '0x137E35BB', label = 'Organic Type 0 C' },
+    { hash = '0x162D41C2', label = 'Deep Five SE' },
+    { hash = '0x250EEE14', label = 'Synthetic Z' },
+    { hash = '0x378BB23B', label = 'Deep Five C' },
+    { hash = '0x302D8AB9', label = 'Ice Kid CL' },
+    { hash = '0x412F0703', label = 'GT One CL' },
+    { hash = '0x481B0F00', label = 'Concave Racer C' },
+    { hash = '0x696D76D8', label = 'Deep Five' },
+    { hash = '0x699BD2AE', label = 'Double Impact' },
+    { hash = '0x869B9838', label = 'Ruff Weld C' },
+    { hash = '0x1310CAED', label = 'Concave Racer CL' },
+    { hash = '0x1930BD64', label = 'Panopticon C' },
+    { hash = '0x3474EFDF', label = 'Organic Type 0 SE' },
+    { hash = '0x5496BE6C', label = 'Split Star' },
+    { hash = '0x5736D26B', label = 'Inferno' },
+    { hash = '0x6000BF78', label = 'High Five' },
+    { hash = '0x6284CDD8', label = 'LozSpeed Mk.V Accent' },
+    { hash = '0x6560F51F', label = 'Inferno C' },
+    { hash = '0x9558B5B2', label = 'Ice Kid C' },
+    { hash = '0x9920C643', label = 'Dash VIP' },
+    { hash = '0x13514A99', label = 'Mercie' },
+    { hash = '0x23364D62', label = 'Organic Type 0 CL' },
+    { hash = '0x36756BB5', label = 'Split Star C' },
+    { hash = '0x43181B6F', label = 'Concave Racer' },
+    { hash = '0x52024ACB', label = 'Ultra Mesh CL' },
+    { hash = '0x86138CD5', label = 'Chrono CL' },
+    { hash = '0x163141A2', label = 'Driftmeister' },
+    { hash = '0x917421B1', label = 'Hilltop Star C' },
+    { hash = '0x3739824A', label = 'AeroShield' },
+    { hash = '0x14562710', label = 'FiftyNine CL' },
+    { hash = '0x48252421', label = 'Split Six' },
+    { hash = '0x72602423', label = 'Super Five CL' },
+    { hash = '0x72801046', label = 'Interlinx CL' },
+    { hash = '0x93925916', label = 'Synthetic Z SE' },
+    { hash = '0xA08FC5BC', label = 'Machismo C' },
+    { hash = '0xA0B4C3DD', label = 'Uzer CL' },
+    { hash = '0xA24D768C', label = 'Synthetic Z Accent' },
+    { hash = '0xA71FF665', label = 'Hilltop Star Accent' },
+    { hash = '0xA92EDD5E', label = 'Spada Cut C' },
+    { hash = '0xA338C53A', label = 'Sports Monoblock C' },
+    { hash = '0xA1674238', label = 'Diamond Cut Accent' },
+    { hash = '0xAA7BE3A0', label = 'S Racer C' },
+    { hash = '0xAB1DEA3D', label = 'AP Cosmo' },
+    { hash = '0xACEE9833', label = 'Endo v.2 CL' },
+    { hash = '0xAD34DBB5', label = 'GroundRide CL' },
+    { hash = '0xB0340AC8', label = 'Synthetic Z C' },
+    { hash = '0xB8E0F08E', label = 'Interlinx C' },
+    { hash = '0xB56DAF7D', label = 'Double Impact CL' },
+    { hash = '0xB56EE9A6', label = 'Driftmeister C' },
+    { hash = '0xB489A649', label = 'Split Six CL' },
+    { hash = '0xB9780A6D', label = 'GT One' },
+    { hash = '0xB77079E1', label = 'AeroShield C' },
+    { hash = '0xBB2BF14B', label = 'Cosmo CL' },
+    { hash = '0xBDAC9F51', label = 'Feroci RR' },
+    { hash = '0xBF88144D', label = 'Cosmo MKII' },
+    { hash = '0xBFCD0E46', label = 'Dash VIP C' },
+    { hash = '0xC07B3F4C', label = 'Endo v.2 Accent' },
+    { hash = '0xC0C78C93', label = 'Wangan Master C' },
+    { hash = '0xC8E9A950', label = 'AP Endo v.1' },
+    { hash = '0xCA3952C8', label = 'AP Endo v.2 SE' },
+    { hash = '0xCB1F950B', label = 'Cosmo MKII C' },
+    { hash = '0xCB103E45', label = 'Hilltop Star CL' },
+    { hash = '0xCB851CD9', label = 'Endo v.1 SE' },
+    { hash = '0xCC3A2CCA', label = 'Panopticon Accent' },
+    { hash = '0xCE1FAAEB', label = 'Cosmo C' },
+    { hash = '0xD0E63742', label = 'Ruff Weld Mega Deep SE' },
+    { hash = '0xD3A6D1AD', label = 'LozSpeed Mk.V C' },
+    { hash = '0xD9F73551', label = 'S Racer CL' },
+    { hash = '0xD85B54AE', label = 'Diamond Cut' },
+    { hash = '0xD88A307D', label = 'Diamond Cut SE' },
+    { hash = '0xD463BE04', label = 'Interlinx' },
+    { hash = '0xD932B834', label = 'Endo v.1 Accent' },
+    { hash = '0xD74551B3', label = 'Split Star Accent' },
+    { hash = '0xDB2D4DD7', label = 'Organic Type 0' },
+    { hash = '0xDE8FCBCB', label = 'Duper 7 C' },
+    { hash = '0xE3EF4B69', label = 'Duper 7 CL' },
+    { hash = '0xE12AD62A', label = 'Ice Kid' },
+    { hash = '0xE407D313', label = 'Super Five C' },
+    { hash = '0xE5507500', label = 'Diamond Cut C' },
+    { hash = '0xEA157822', label = 'AP Chrono' },
+    { hash = '0xECCCE859', label = 'AP Endo v.1 C' },
+    { hash = '0xECFE2421', label = 'AP High Five CL' },
+    { hash = '0xF98C8859', label = 'Hilltop Star' },
+    { hash = '0xF8093B57', label = 'Machismo Accent' },
+    { hash = '0xFB389C95', label = 'Superfresh Accent' },
+    { hash = '0xFE6C1158', label = 'Inferno CL' },
+    { hash = '0xFEF211BC', label = 'AP Wangan Master' },
+}
+```
+
+## Missions
+This is where you can access all the side mission configurations like locations, peds, vehicles, etc
+```lua filename="mt_workshops/configs/missions.lua"
+Config = Config or {}
+
+Config.missions = {
+    { car = vec4(-57.33, 1956.8, 189.59, 29.07), ped = vec4(-54.3, 1957.52, 189.19, 93.05) },
+    { car = vec4(726.29, 2307.76, 49.76, 266.55), ped = vec4(726.49, 2311.77, 49.47, 154.55) },
+    { car = vec4(1208.74, 2642.99, 37.23, 323.26), ped = vec4(1207.77, 2647.07, 36.85, 206.37) },
+    { car = vec4(2411.66, 4990.02, 45.64, 133.12), ped = vec4(2415.07, 4988.76, 45.22, 58.86) },
+    { car = vec4(1943.89, 4628.31, 39.85, 11.09), ped = vec4(1937.36, 4631.22, 39.51, 265.63) },
+    { car = vec4(1657.66, 4825.27, 41.39, 296.92), ped = vec4(1656.86, 4829.04, 41.0, 169.01) },
+}
+
+Config.missionsVehicles = {
+    'sultan',
+    'sultan2',
+    'sentinel',
+    'sentinel2',
+    'vacca',
+    'entityxf',
+    'entity2',
+    'entity3',
+    'banshee',
+    'blista',
+    'blista2',
+    'cheetah',
+    'cog55',
+    'comet2',
+    'comet6',
+    'elegy2',
+    'ellie',
+    'f620',
+    'feltzer2',
+    'penumbra',
+    'penumbra2',
+    'surano',
+    'oracle',
+    'raiden'
+}
+
+Config.missionsPeds = {
+    'ig_djblamryans',
+    'ig_djblamrupert',
+    'ig_cletus',
+    'ig_devin',
+    'ig_floyd',
+    'ig_jewelass',
+    'ig_lacey_jones_02',
+    'ig_lazlow_2',
+    'ig_brad',
+    'hc_hacker',
+    'u_m_y_caleb',
+    'u_m_m_curtis',
+    'u_m_y_staggrm_01',
+    'u_m_y_babyd',
+    'a_f_m_skidrow_01',
+    'a_f_m_soucentmc_01',
+    'a_f_m_soucent_01',
+    'a_f_m_soucent_02',
+    'a_f_m_tourist_01',
+    'a_f_m_trampbeac_01',
+    'a_f_m_tramp_01',
+    'a_f_o_genstreet_01',
+    'a_f_o_indian_01',
+    'a_f_o_ktown_01',
+    'a_f_o_salton_01',
+    'a_f_o_soucent_01',
+    'a_f_o_soucent_02',
+    'a_f_y_beach_01',
+    'a_f_y_bevhills_01',
+    'a_f_y_bevhills_02',
+    'a_f_y_bevhills_03',
+    'a_f_y_bevhills_04',
+    'a_f_y_business_01',
+    'a_f_y_business_02',
+    'a_f_y_business_03',
+    'a_f_y_business_04',
+    'a_f_y_eastsa_01',
+    'a_f_y_eastsa_02',
+    'a_f_y_eastsa_03',
+    'a_f_y_epsilon_01',
+    'a_f_y_fitness_01',
+    'a_f_y_fitness_02',
+    'a_f_y_genhot_01',
+    'a_f_y_golfer_01',
+    'a_f_y_hiker_01',
+    'a_f_y_hipster_01',
+    'a_f_y_hipster_02',
+    'a_f_y_hipster_03',
+    'a_f_y_hipster_04',
+    'a_f_y_indian_01',
+    'a_f_y_juggalo_01',
+    'a_f_y_runner_01',
+    'a_f_y_rurmeth_01',
+    'a_f_y_scdressy_01',
+    'a_f_y_skater_01',
+    'a_f_y_soucent_01',
+    'a_f_y_soucent_02',
+    'a_f_y_soucent_03',
+    'a_f_y_tennis_01',
+    'a_f_y_tourist_01',
+    'a_f_y_tourist_02',
+    'a_f_y_vinewood_01',
+    'a_f_y_vinewood_02',
+    'a_f_y_vinewood_03',
+    'a_f_y_vinewood_04',
+    'a_f_y_yoga_01',
+    'g_f_y_ballas_01',
+    'ig_barry',
+    'ig_bestmen',
+    'ig_beverly',
+    'ig_car3guy1',
+    'ig_car3guy2',
+    'ig_casey',
+    'ig_chef',
+    'ig_chengsr',
+    'ig_chrisformage',
+    'ig_clay',
+    'ig_claypain',
+    'ig_cletus',
+    'ig_dale',
+    'ig_dreyfuss',
+    'ig_fbisuit_01',
+    'ig_floyd',
+    'ig_groom',
+    'ig_hao',
+    'ig_hunter',
+    'csb_prolsec',
+    'ig_joeminuteman',
+    'ig_josef',
+    'ig_josh',
+    'ig_lamardavis',
+    'ig_lazlow',
+    'ig_lestercrest',
+    'ig_lifeinvad_01',
+    'ig_lifeinvad_02',
+    'ig_manuel',
+    'ig_milton',
+    'ig_mrk',
+    'ig_nervousron',
+    'ig_nigel',
+    'ig_old_man1a',
+    'ig_old_man2',
+    'ig_oneil',
+    'ig_orleans',
+    'ig_ortega',
+    'ig_paper',
+    'ig_priest',
+    'ig_prolsec_02',
+    'ig_ramp_gang',
+    'ig_ramp_hic',
+    'ig_ramp_hipster',
+    'ig_ramp_mex',
+    'ig_roccopelosi',
+    'ig_russiandrunk',
+    'ig_siemonyetarian',
+    'ig_solomon',
+    'ig_stevehains',
+    'ig_stretch',
+    'ig_talina',
+    'ig_taocheng',
+    'ig_taostranslator',
+    'ig_tenniscoach',
+    'ig_terry',
+    'ig_tomepsilon',
+    'ig_tylerdix',
+    'ig_wade',
+    'ig_zimbor',
+    's_m_m_paramedic_01',
+    'a_m_m_afriamer_01',
+    'a_m_m_beach_01',
+    'a_m_m_beach_02',
+    'a_m_m_bevhills_01',
+    'a_m_m_bevhills_02',
+    'a_m_m_business_01',
+    'a_m_m_eastsa_01',
+    'a_m_m_eastsa_02',
+    'a_m_m_farmer_01',
+    'a_m_m_fatlatin_01',
+    'a_m_m_genfat_01',
+    'a_m_m_genfat_02',
+    'a_m_m_golfer_01',
+    'a_m_m_hasjew_01',
+    'a_m_m_hillbilly_01',
+    'a_m_m_hillbilly_02',
+    'a_m_m_indian_01',
+    'a_m_m_ktown_01',
+    'a_m_m_malibu_01',
+    'a_m_m_mexcntry_01',
+    'a_m_m_mexlabor_01',
+    'a_m_m_og_boss_01',
+    'a_m_m_paparazzi_01',
+    'a_m_m_polynesian_01',
+    'a_m_m_prolhost_01',
+    'a_m_m_rurmeth_01',
+}
+```
+
+## Performance
+This is where you'll find all the performance part item and its levels, if you don't use classes you'll need to edit this!
+```lua filename="mt_workshops/configs/performance.lua"
+Config = Config or {}
+
+Config.performance = {
+    { modType = 11, item = 'engine_s', level = 'max', class = 'S' },
+    { modType = 11, item = 'engine_a', level = 'max', class = 'A' },
+    { modType = 11, item = 'engine_b', level = 'max', class = 'B' },
+    { modType = 11, item = 'engine_c', level = 'max', class = 'C' },
+    { modType = 11, item = 'engine_d', level = 'max', class = 'D' },
+
+    { modType = 13, item = 'transmission_s', level = 'max', class = 'S' },
+    { modType = 13, item = 'transmission_a', level = 'max', class = 'A' },
+    { modType = 13, item = 'transmission_b', level = 'max', class = 'B' },
+    { modType = 13, item = 'transmission_c', level = 'max', class = 'C' },
+    { modType = 13, item = 'transmission_d', level = 'max', class = 'D' },
+
+    { modType = 12, item = 'brake_s', level = 'max', class = 'S' },
+    { modType = 12, item = 'brake_a', level = 'max', class = 'A' },
+    { modType = 12, item = 'brake_b', level = 'max', class = 'B' },
+    { modType = 12, item = 'brake_c', level = 'max', class = 'C' },
+    { modType = 12, item = 'brake_d', level = 'max', class = 'D' },
+
+    { modType = 15, item = 'suspension_s', level = 'max', class = 'S' },
+    { modType = 15, item = 'suspension_a', level = 'max', class = 'A' },
+    { modType = 15, item = 'suspension_b', level = 'max', class = 'B' },
+    { modType = 15, item = 'suspension_c', level = 'max', class = 'C' },
+    { modType = 15, item = 'suspension_d', level = 'max', class = 'D' },
+
+    { modType = 16, item = 'armour_s', level = 'max', class = 'S' },
+    { modType = 16, item = 'armour_a', level = 'max', class = 'A' },
+    { modType = 16, item = 'armour_b', level = 'max', class = 'B' },
+    { modType = 16, item = 'armour_c', level = 'max', class = 'C' },
+    { modType = 16, item = 'armour_d', level = 'max', class = 'D' },
+
+    { modType = 18, item = 'turbo_s', class = 'S' },
+    { modType = 18, item = 'turbo_a', class = 'A' },
+    { modType = 18, item = 'turbo_b', class = 'B' },
+    { modType = 18, item = 'turbo_c', class = 'C' },
+    { modType = 18, item = 'turbo_d', class = 'D' },
+}
+```
+
+## Shops
+This is where you can edit the shops as you want, change, remove or add items
+```lua filename="mt_workshops/configs/performance.lua"
+Config = Config or {}
+
+Config.shops = {
+    performance = {
+        categoryLabel = 'Performance',
+        items = {
+            { name = 'engine_s', price = 10000, count = 1000 },
+            { name = 'engine_a', price = 10000, count = 1000 },
+            { name = 'engine_b', price = 10000, count = 1000 },
+            { name = 'engine_c', price = 10000, count = 1000 },
+            { name = 'engine_d', price = 10000, count = 1000 },
+            { name = 'transmission_s', price = 10000, count = 1000 },
+            { name = 'transmission_a', price = 10000, count = 1000 },
+            { name = 'transmission_b', price = 10000, count = 1000 },
+            { name = 'transmission_c', price = 10000, count = 1000 },
+            { name = 'transmission_d', price = 10000, count = 1000 },
+            { name = 'suspension_s', price = 10000, count = 1000 },
+            { name = 'suspension_a', price = 10000, count = 1000 },
+            { name = 'suspension_b', price = 10000, count = 1000 },
+            { name = 'suspension_c', price = 10000, count = 1000 },
+            { name = 'suspension_d', price = 10000, count = 1000 },
+            { name = 'turbo_s', price = 10000, count = 1000 },
+            { name = 'turbo_a', price = 10000, count = 1000 },
+            { name = 'turbo_b', price = 10000, count = 1000 },
+            { name = 'turbo_c', price = 10000, count = 1000 },
+            { name = 'turbo_d', price = 10000, count = 1000 },
+            { name = 'armour_s', price = 10000, count = 1000 },
+            { name = 'armour_a', price = 10000, count = 1000 },
+            { name = 'armour_b', price = 10000, count = 1000 },
+            { name = 'armour_c', price = 10000, count = 1000 },
+            { name = 'armour_d', price = 10000, count = 1000 },
+            { name = 'brake_s', price = 10000, count = 1000 },
+            { name = 'brake_a', price = 10000, count = 1000 },
+            { name = 'brake_b', price = 10000, count = 1000 },
+            { name = 'brake_c', price = 10000, count = 1000 },
+            { name = 'brake_d', price = 10000, count = 1000 },
+        }
+    },
+    others = {
+        categoryLabel = 'Others',
+        items = {
+            { name = 'cosmetics', price = 7500, count = 1000 },
+            { name = 'neons_controller', price = 15000, count = 1000 },
+            { name = 'mechanic_toolbox', price = 200, count = 1000 },
+            { name = 'engine_repair_kit', price = 500, count = 1000 },
+            { name = 'body_repair_kit', price = 500, count = 1000 },
+        }
+    },
+}
+```
+
+## Stations
+This is where you can add the stations, follow the examples and just do like it's there explained
+```lua filename="mt_workshops/configs/stations.lua"
+Config = Config or {}
+
+Config.stations = {
+    { -- La Mesa LS Customs
+        label = "Repair station",
+        job = false,
+        checkMecs = true,
+        price = 100,
+        progress = 5000,
+        blip = { enabled = true, color = 0, sprite = 446, display = 4, scale = 0.6 },
+        type = 'zone', -- zone or prop
+        zone = {
+            points = {
+                vec3(725.68, -1084.01, 22.10),
+                vec3(724.72, -1091.28, 22.10),
+                vec3(738.49, -1094.68, 22.10),
+                vec3(737.25, -1084.05, 22.10)
+            },
+            thickness = 5
+        }
+    },
+    { -- Route 68 Harmony
+        label = "Repair station",
+        job = false,
+        checkMecs = true,
+        price = 100,
+        progress = 5000,
+        blip = { enabled = true, color = 0, sprite = 446, display = 4, scale = 0.6 },
+        type = 'zone', -- zone or prop
+        zone = {
+            points = {
+                vec3(1171.92, 2645.99, 37.8),
+                vec3(1178.87, 2644.73, 37.8),
+                vec3(1178.01, 2635.96, 37.8),
+                vec3(1172.33, 2635.59, 37.8)
+            },
+            thickness = 5
+        }
+    },
+    { -- Beekers Garage
+        label = "Repair station",
+        job = false,
+        checkMecs = true,
+        price = 100,
+        progress = 5000,
+        blip = { enabled = true, color = 0, sprite = 446, display = 4, scale = 0.6 },
+        type = 'zone', -- zone or prop
+        zone = {
+            points = {
+                vec3(116.42, 6624.58, 31.8),
+                vec3(113.01, 6621.05, 31.8),
+                vec3(105.44, 6627.51, 31.8),
+                vec3(109.25, 6631.74, 31.8)
+            },
+            thickness = 5
+        }
+    },
+    { -- Misson Row LSPD
+        label = "LSPD Repair Station",
+        job = 'police',
+        checkMecs = false,
+        price = 100,
+        progress = 5000,
+        blip = { enabled = false, color = 0, sprite = 446, display = 4, scale = 0.6 },
+        type = 'zone', -- zone or prop
+        zone = {
+            points = {
+        		vec3(452.0, -969.5, 26.0),
+                vec3(452.14999389648, -974.0, 26.0),
+                vec3(445.5, -973.75, 26.0),
+                vec3(445.5, -969.5, 26.0),
+            },
+            thickness = 5
+        }
+    },
+    { -- Route 68 BCSO
+        label = "BCSO Repair Station",
+        job = 'police',
+        checkMecs = false,
+        price = 100,
+        progress = 5000,
+        blip = { enabled = false, color = 0, sprite = 446, display = 4, scale = 0.6 },
+        type = 'prop', -- zone or prop
+        prop = {
+            model = 'gr_prop_gr_bench_01b',
+            radius = 5,
+            coords = vec4(1050.85, 2746.15, 37.67, 178.12+180),
+        }
+    },
+}
+```
+
+## Workshops folders
+This is an example of workshop config, follow the example and read the comments to understand what does every field
+```lua filename="mt_workshops/workshops/..." copy
+Config.workshops = Config.workshops or {}
+
+-- This config is made to work with the Kiiya's LS Auto Shop MLO
+-- Check: https://kiiya.tebex.io/package/5845981
+
+Config.workshops.examplejob = { -- Workshop ID, needs to be the same as the job!!
+    enabled = true, -- enable the workshop or not
+    label = 'Example workshop', -- Label that will show on the map blip and etc
+    job = 'examplejob', -- Job that will be able to access everything in the workshop
+    blip = { enabled = true, coords = vec3(1144.52, -773.53, 57.65), color = 6, scale = 0.8, display = 4, sprite = 402 }, -- map blip
+    zone = { -- Workshop zone to toggle duty and access preview, use /zone poly to create it!
+        points = {
+            vec3(1171.5, -765.25, 57.40),
+            vec3(1165.41, -804.57, 57.40),
+            vec3(1116.92, -804.56, 57.40),
+            vec3(1116.7, -765.53, 57.40)
+        },
+        thickness = 15
+    },
+    managements = { -- Workshop management locations
+        { coords = vec3(1153.5, -792.25, 57.5), radius = 0.3 },
+    },
+    stashes = { -- Workshop stashes locations
+        { coords = vec3(1149.1, -789.65, 57.7), radius = 0.45, slots = 50, weight = 100 },
+    },
+    crafts = { -- Workshop crafts locations
+        { coords = vec3(1150.9, -789.1, 57.8), radius = 0.45, categories = { 'performance', 'others' } },
+    },
+    shops = { -- Workshop shops locations
+        { coords = vec3(1135.7, -782.05, 57.6), radius = 0.3, categories = { 'performance', 'others' } },
+    },
+    registers = { -- Workshop registers locations
+        { coords = vec3(1135.25, -782.1, 57.65), radius = 0.3, comission = 10, playersRadius = 5.0 },
+    },
+    mission = { -- Workshop side mission locations
+        { coords = vec3(1137.2, -782.1, 57.5), radius = 0.2, prop = 'hei_prop_hei_bank_phone_01', propHeading = 139.31+180, minPayment = 100, maxPayment = 500, cooldown = 10 }
+    },
+    garage = { -- Workshop garage options
+        {
+            coords = vec4(1155.0, -774.86, 56.62, 357.97+180),
+            spawnCoords = vec4(1155.4, -767.75, 57.48, 357.44),
+            vehicles = {
+                { icon = 'fas fa-truck', label = 'Flatbed', id = 'flatbed' },
+                { icon = 'fas fa-truck', label = 'Tow truck', id = 'towtruck' },
+            },
+        },
+    },
+}
+```

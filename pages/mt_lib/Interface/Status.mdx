@@ -1,0 +1,22 @@
+# Mission Status UI
+This is just a nice UI to add with the status of some mission
+
+**Preview**
+![imagem](https://github.com/user-attachments/assets/1ebd4d13-9cc3-45ec-a7eb-0b3184112270)
+
+## Client exports
+**Show Mission Status**
+```lua copy
+---@param title string
+---@param text string
+exports.mt_lib:showMissionStatus(title, text)
+```
+- title: `string`
+    - Status title
+- text: `string`
+    - Status description, supports HTML tags
+
+**Hide Mission Status**
+```lua copy
+exports.mt_lib:hideMissionStatus()
+```

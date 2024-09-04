@@ -1,0 +1,29 @@
+## Client exports
+Opens the cosmetics menu
+```lua copy
+---@param data table | nil
+---@param item table
+exports.mt_workshops:openCosmeticsMenu(data, item)
+```
+
+Use repair kit
+```lua copy
+---@param action string
+exports.mt_workshops:useRepairKit(action)
+-- action can be engine or body
+```
+
+Open the lights menu
+```lua copy
+exports.mt_workshops:openLightsController()
+```
+
+Open the preview menu
+```lua copy
+exports.mt_workshops:openPreviewMenu()
+```
+
+Open toolbox menu
+```lua copy
+exports.mt_workshops:openToolboxMenu()
+```

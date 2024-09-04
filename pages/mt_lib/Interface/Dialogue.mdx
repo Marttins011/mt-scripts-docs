@@ -1,0 +1,35 @@
+# NPC Dialogue exports
+This is just a nice UI to add some actions when interacting with NPCs
+
+**Preview**
+![imagem](https://github.com/user-attachments/assets/4dbb6fd6-2048-465a-8777-fa1bf9eeb712)
+
+## Client exports
+**Show NPC Dialogue**
+```lua copy
+---@param data table
+exports.mt_lib:showDialogue(data)
+```
+- data: `table` (`object`)
+    - ped: `number` (`integer`)
+        - Target ped entity
+    - label: `string`
+        - Dialogue Title
+    - speech: `string`
+        - Dialogue description
+    - options: `table` (`object`)
+        - id: `string` | `number`
+            - Option index
+        - label: `string`
+            - Option label
+        - icon: `string`
+            - Option Icon from Fontawesome
+        - close: `boolean`
+            - If the UI should close after using the option
+        - action: `function`
+            - Function to execute when clicking the option
+
+**Hide NPC Dialogue**
+```lua copy
+exports.mt_lib:hideDialogue()
+```
