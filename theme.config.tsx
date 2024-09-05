@@ -1,10 +1,12 @@
 import React from 'react'
 import { useRouter } from "next/router"
-import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
+import { DocsThemeConfig, useConfig  } from 'nextra-theme-docs'
 
 const useHead = () => {
+  const { asPath } = useRouter();
   const { frontMatter, title } = useConfig()
   const description = frontMatter.description || "Documentation for MT Scripts"
+  const url = `https://mt-scripts-docs.versel.app${asPath}`
 
   return (
     <>
@@ -12,7 +14,14 @@ const useHead = () => {
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
+      <meta property="og:image" content="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
+      <meta property="og:site_name" content={title} />
+      <meta property="og:url" content={url} />
       <meta property="og:description" content={description} />
+      <meta property="twitter:image" content="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
+      <meta property="twitter:card" content="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
     </>
   )
 }
