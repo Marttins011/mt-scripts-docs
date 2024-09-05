@@ -19,7 +19,7 @@ const useHead = () => {
       <meta property="og:url" content={url} />
       <meta property="og:description" content={description} />
       <meta property="twitter:image" content="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
-      <meta property="twitter:card" content="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
+      <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
     </>
