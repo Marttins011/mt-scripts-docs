@@ -1,0 +1,33 @@
+# Interaction points exports
+This is basically an simple point with an Key Text UI and an key listener to execute an function when clicking it
+
+## Client exports
+
+Create Interaction point
+```lua copy
+---@param id string | number
+---@param coords table
+---@param distance number
+---@param label string
+---@param key number
+---@param keyLabel string
+---@param onClick function
+---@param canInteract boolean
+exports.mt_lib:createInteractionPoint(id, coords, distance, label, key, keyLabel, onClick, canInteract)
+```
+- id: `string` | `number`
+    - Basically the index used to remove the Interaction
+- coords: `table` (`vector`)
+    - Interaction coordinates
+- distance: `number`
+    - Interaction distance
+- label: `string`
+    - Interaction label
+- key: `number`
+    - Control key to Interact
+- keyLabel: `string`
+    - The control keyboard label
+- onClick: `function`
+    - Function to execute when pressing the designed key on the coordinates
+- canInteract: `boolean`
+    - Condiction to check if the player can interact
