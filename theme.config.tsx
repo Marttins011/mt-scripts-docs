@@ -1,35 +1,32 @@
 import React from 'react'
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 
-function useHead() {
-  const { frontMatter, title } = useConfig();
-  const description = frontMatter.description || "Documentation for the MT Scripts";
+const useHead = () => {
+  const { frontMatter, title } = useConfig()
+  const description = frontMatter.description || "Documentation for MT Scripts"
 
   return (
     <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/x-icon" href="https://i.ibb.co/7CQ0yL0/Logo-PNG-2-K.png" />
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content={description} />
-      <meta name="og:title" content={title} />
-      <meta name="og:description" content={description} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
     </>
-  );
+  )
 }
 
-function useNextSeoProps() {
-  const { asPath } = useRouter();
-  const arr = asPath.replace(/[-_]/g, " ").split("/");
-  const category = (arr[1][0] !== "#" && arr[1]) || "MT Scripts";
-  const rawTitle = arr[arr.length - 1];
-  const title = /[a-z]/.test(rawTitle) && /[A-Z]/.test(rawTitle) ? rawTitle : "%s";
+const useNextSeoProps = () => {
+  const { asPath } = useRouter()
+  const pathParts = asPath.replace(/[-_]/g, " ").split("/")
+  const category = pathParts[1] && pathParts[1][0] !== "#" ? pathParts[1] : "MT Scripts"
+  const rawTitle = pathParts[pathParts.length - 1]
+  const title = /[a-z]/.test(rawTitle) && /[A-Z]/.test(rawTitle) ? rawTitle : "%s"
 
   return {
-    titleTemplate: `${title} - ${
-      rawTitle === category ? "Documentation" : category.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
-    }`,
-  };
+    titleTemplate: `${title} - ${rawTitle === category ? "Documentation" : category.replace(/\b\w/g, (m) => m.toUpperCase())}`,
+  }
 }
 
 const config: DocsThemeConfig = {
