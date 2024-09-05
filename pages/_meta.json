@@ -1,8 +1,21 @@
 {
   "index": "Introduction",
-  "restaurants": "MT Restaurants",
-  "dealerships": "MT Dealerships",
-  "workshops": "MT Workshops",
+  "paid": {
+    "title": "Paid scripts",
+    "type": "separator"
+  },
+  "containers": "MT Containers",
+  "speakers": "MT Speakers",
+  "nitrous": "MT Nitrous",
+  "hud": "MT Hud 2.0",
+  "restaurants": "MT Restaurants 2.0",
+  "garages": "MT Garages",
+  "dealerships": "MT Dealerships 2.0",
+  "workshops": "MT Workshops 2.0",
+  "free": {
+    "title": "Free scripts",
+    "type": "separator"
+  },
   "lib": "MT Lib",
   "contact": {
     "title": "Store",

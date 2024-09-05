@@ -1,0 +1,23 @@
+## SQL
+Run the following SQL query to your data base
+```sql copy
+CREATE TABLE `containers` (
+	`ID` INT(10) NOT NULL AUTO_INCREMENT,
+	`coords` LONGTEXT,
+	`label` MEDIUMTEXT NULL DEFAULT NULL,
+	`price` VARCHAR(500) NULL,
+	`slots` VARCHAR(500) NULL,
+	`weight` VARCHAR(500) NULL,
+	`owner` VARCHAR(500) NULL,
+	`code` VARCHAR(500) NULL,
+	PRIMARY KEY (`ID`) USING BTREE,
+	UNIQUE INDEX `ID` (`ID`) USING BTREE
+);
+```
+
+## ACE Permissions
+Add the ACE permission down bellow to your server.cfg file
+```cfg copy
+# MT Containers
+add_ace identifier.(here your identifier) containers.creation allow
+```

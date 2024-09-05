@@ -1,0 +1,10 @@
+## PMA Voice Changes
+At pma-voice/client/module/radio.lua on +radiotalk command after playMicClicks(true) function add the following export
+```lua copy filename="pma-voice/client/module/radio.lua"
+exports['mt-hud']:SetPlayerVoice("radio")
+```
+
+At pma-voice/client/module/radio.lua on -radiotalk command after playMicClicks(false) function add the following export
+```lua copy filename="pma-voice/client/module/radio.lua"
+exports['mt-hud']:SetPlayerVoice("false")
+```

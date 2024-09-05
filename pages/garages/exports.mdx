@@ -1,0 +1,36 @@
+## Client exports
+Set player as inside of an garage
+```lua copy
+---@param value boolean
+exports['mt-garages']:inGarage(value)
+```
+
+Open garage menu
+```lua copy
+exports['mt-garages']:openGarageMenu()
+```
+
+Store vehicle
+```lua copy
+exports['mt-garages']:storeVehicle()
+```
+
+Impound vehicle
+```lua copy
+exports['mt-garages']:impoundVehicle()
+```
+
+## Server exports
+Check if vehicle is impounded
+```lua copy
+---@param plate string
+---@return impounded boolean
+exports['mt-garages']:checkIsImpounded(plate)
+```
+
+Get vehicle last location
+```lua copy
+---@param plate string
+---@return coords table
+exports['mt-garages']:getVehicleLastLocation(plate)
+```

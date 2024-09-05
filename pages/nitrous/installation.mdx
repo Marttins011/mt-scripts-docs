@@ -1,0 +1,50 @@
+## SQL
+Run the following SQL query to your data base
+```sql copy
+CREATE TABLE `vehicles_nitrous` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`vehiclePlate` MEDIUMTEXT,
+	`nitrousLevel` MEDIUMTEXT,
+    `nitrousColor` MEDIUMTEXT,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `id` (`id`) USING BTREE
+);
+```
+
+## OX Inventory Items
+Add the following items to your ox_inventory/data/items.lua (only if using ox_inventory)
+```lua copy
+-- MT Nitrous
+['nitrous_bottle'] = {
+	label = "Nitrous Bottle",
+	weight = 500,
+	stack = true,
+	close = false,
+},
+['empty_nitrous_bottle'] = {
+	label = "Empty Nitrous Bottle",
+	weight = 100,
+	stack = true,
+	close = false,
+},
+['nitrous_purge_color'] = {
+	label = "Purge Color Controller",
+	weight = 100,
+	stack = true,
+	close = false,
+},
+```
+
+## QB Inventory Items
+Add the following item to your qb-core/shared/items.lua (only if using qb-core without ox_iventory)
+```lua copy
+["nitrous_bottle"] = {["name"] = "nitrous_bottle", 					["label"] = "Nitrous Bottle", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "nitrous_bottle.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+["empty_nitrous_bottle"] = {["name"] = "empty_nitrous_bottle", 					["label"] = "Empty Nitrous Bottle", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "empty_nitrous_bottle.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+["nitrous_purge_color"] = {["name"] = "nitrous_purge_color", 					["label"] = "Purge Color Controller", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "nitrous_purge_color.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+```
+
+## Inventory images
+Add the images at mt-nitrous/images to your inv images folder
+
+## Sounds
+Add the sounds at mt-nitrous/sounds to interact-sound/client/html/sounds

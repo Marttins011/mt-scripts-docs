@@ -1,0 +1,52 @@
+## SQL
+Run the following SQL query to your data base
+```lua copy 
+CREATE TABLE `speakers` (
+	`ID` INT(10) NOT NULL AUTO_INCREMENT,
+	`coords` LONGTEXT,
+	`speaker` LONGTEXT,
+	PRIMARY KEY (`ID`) USING BTREE,
+	UNIQUE INDEX `ID` (`ID`) USING BTREE
+);
+
+CREATE TABLE `speaker_musics` (
+	`ID` INT(10) NOT NULL AUTO_INCREMENT,
+	`citizenid` VARCHAR(100),
+	`music` LONGTEXT,
+	PRIMARY KEY (`ID`) USING BTREE,
+	UNIQUE INDEX `ID` (`ID`) USING BTREE
+);
+```
+
+## QB Inventory items
+If using qb-inventory add the following items to qb-core/shared/items.lua
+```lua copy
+["low_speaker"] = {["name"] = "low_speaker", 					["label"] = "Low Music Speaker", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "low_speaker.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+["medium_speaker"] = {["name"] = "medium_speaker", 					["label"] = "Medium Music Speaker", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "medium_speaker.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+["high_speaker"] = {["name"] = "high_speaker", 					["label"] = "High Music Speaker", 				["weight"] = 500, 		["type"] = "item", 			["image"] = "high_speaker.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+```
+
+## OX Inventory items 
+```lua copy
+["low_speaker"] = {
+	label = "Low Speaker",
+	weight = 300,
+	stack = true,
+	close = true,
+	description = "",
+},
+["medium_speaker"] = {
+	label = "Medium Speaker",
+	weight = 500,
+	stack = true,
+	close = true,
+	description = "",
+},
+["high_speaker"] = {
+	label = "High Speaker",
+	weight = 1000,
+	stack = true,
+	close = true,
+	description = "",
+},
+```

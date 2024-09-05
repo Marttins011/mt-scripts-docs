@@ -1,0 +1,38 @@
+## SQL
+If you don't have player_vehicles table already just run the following sql code:
+```sql copy
+CREATE TABLE IF NOT EXISTS `player_vehicles` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `license` varchar(50) DEFAULT NULL,
+    `citizenid` varchar(50) DEFAULT NULL,
+    `vehicle` varchar(50) DEFAULT NULL,
+    `hash` varchar(50) DEFAULT NULL,
+    `mods` longtext DEFAULT NULL,
+    `plate` varchar(50) NOT NULL,
+    `fakeplate` varchar(50) DEFAULT NULL,
+    `fuel` int(11) DEFAULT 100,
+    `drivingdistance` int(50) DEFAULT NULL,
+    `status` text DEFAULT NULL,
+    `balance` int(11) NOT NULL DEFAULT 0,
+    `paymentamount` int(11) NOT NULL DEFAULT 0,
+    `paymentsleft` int(11) NOT NULL DEFAULT 0,
+    `financetime` int(11) NOT NULL DEFAULT 0,
+    `lastLocation` LONGTEXT NULL DEFAULT NULL,
+    `impoundprice` INT(10) NOT NULL DEFAULT '0',
+    `impound` VARCHAR(50) NULL DEFAULT 'no',
+    `keyholders` longtext DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `plate` (`plate`),
+    KEY `citizenid` (`citizenid`),
+    KEY `license` (`license`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+If you already have the player_vehicles table run this one:
+```sql copy
+ALTER TABLE `player_vehicles`
+ADD `lastLocation` LONGTEXT NULL DEFAULT NULL,
+ADD `impoundprice` INT(10) NOT NULL DEFAULT '0',
+ADD `impound` VARCHAR(50) NULL DEFAULT 'no',
+ADD `keyholders` longtext DEFAULT NULL
+```

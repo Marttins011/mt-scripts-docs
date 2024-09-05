@@ -1,0 +1,27 @@
+## Main config
+config.lua is the Configuration file of the script
+```lua filename="mt-containers/config.lua"
+Config = Config or {}
+
+Config.Core = 'qbx-core' -- Your Core resource name (qb-core, qbx-core, ...)
+Config.Inventory = 'ox_inventory' -- Your Inventory resource name (qb-inventory, ox_inventory, ...)
+Config.Target = 'ox_target' -- Your Target resource name (qb-target, ox_target, ...)
+Config.Debug = false -- Active target debug
+
+Config.Webhook = ''
+
+Config.activeSell = true -- When true players will be able to sell the containers
+Config.sellPercentage = 50 -- This is the percentage of the containers price that players will receive when selling containers
+Config.activeTransfer = true -- When true players will be able to tranfer the containers to other players
+
+Config.Commands = {
+    createContainersCommand = {
+        command = 'createcontainer',
+        description = 'Create containers to sell (admin only)',
+    },
+    seeContainersBlips = {
+        command = 'seecontainers',
+        description = 'See all containers available to buy in the GPS',
+    }
+}
+```

@@ -1,0 +1,14 @@
+## Main config 
+config.lua is the Configuration file of the script
+```lua filename="mt-speakers/config.lua"
+Config = Config or {}
+
+Config.Core = 'qbx-core'
+Config.Target = 'ox_target'
+
+Config.Speakers = {
+    { prop = 'prop_boombox_01', item = 'low_speaker', maxVol = 30, maxDist = 20 },
+    { prop = 'prop_speaker_03', item = 'medium_speaker', maxVol = 50, maxDist = 60 },
+    { prop = 'ba_prop_battle_club_speaker_large', item = 'high_speaker', maxVol = 100, maxDist = 200 },
+}
+```

@@ -1,0 +1,228 @@
+## Main config 
+This is the default config file (can have some changes at the future):
+```lua filename="mt-garages/config.lua"
+Config = Config or {}
+
+Config.core = exports['qb-core']:GetCoreObject() -- Your core export
+Config.radial = 'ox_lib' -- ox_lib or qb-radialmenu
+Config.target = 'ox_target' -- ox_target or qb-target
+
+Config.useSharedKeys = true -- If true player will be able to share their vehicles with other players
+
+Config.vehiclesTable = 'player_vehicles' -- The database vehicles table
+
+Config.forceVehicleSaveCommand = 'saveVehicle' -- This command will force the save of the vehicle on the current location (set to false if you don't want this)
+Config.sendVehicleGarage = 'sendGarage' -- This command will send the vehicle to a designed garage (only admin)
+Config.sendGarageCoords = vec4(224.147522, -796.550232, 30.672611, 257.638550)
+
+Config.vehicleBlip = { sprite = 523, color = 0, display = 4, scale = 0.8 } -- The blip that will show when you locate the vehicle
+
+Config.onlyShowClosestBlip = true -- If true it'll only show the closest parking garage
+Config.parkingGarages = { -- All available parking garages (if don't want to use delete or set to false Config.parkingGarages)
+    { -- Legion Square
+        blip = { enabled = true, coords = vec3(223.969360, -790.692200, 30.869452), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(226.436707, -733.078735, 29.0),
+            vec3(271.991699, -748.684570, 29.0),
+            vec3(240.011108, -820.074463, 29.0),
+            vec3(200.057175, -805.741577, 29.0),
+        }
+    },
+    { -- Pillbox
+        blip = { enabled = true, coords = vec3(281.621674, -336.494781, 44.919876), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(293.468689, -360.185791, 44.0),
+            vec3(257.300964, -346.807404, 44.0),
+            vec3(268.052063, -314.751373, 44.0),
+            vec3(304.998657, -328.505035, 44.0),
+        }
+    },
+    { -- Mirror Park
+        blip = { enabled = true, coords = vec3(1036.157227, -771.041321, 58.004242), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(1051.353271, -767.762573, 56.0),
+            vec3(1022.498535, -749.343445, 56.0),
+            vec3(1004.403320, -764.567322, 56.0),
+            vec3(1030.526978, -797.363525, 56.0),
+            vec3(1050.898438, -797.088440, 56.0),
+        }
+    },
+    { -- Casino
+        blip = { enabled = true, coords = vec3(889.582886, -39.543922, 78.764114), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(871.730713, 18.039614, 79.0),
+            vec3(818.704346, -45.573284, 79.0),
+            vec3(920.058777, -115.210777, 79.0),
+            vec3(952.515808, -81.758202, 79.0),
+            vec3(940.054504, -62.271404, 79.0),
+            vec3(953.040649, -35.481823, 79.0),
+        }
+    },
+    { -- Elgin Avenue
+        blip = { enabled = true, coords = vec3(691.428101, 243.841858, 93.461678), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(657.728882, 228.567566, 94.0),
+            vec3(699.649353, 214.224564, 94.0),
+            vec3(723.691650, 255.785416, 94.0),
+            vec3(685.200378, 277.939758, 94.0),
+        }
+    },
+    { -- Elgin Avenue 2
+        blip = { enabled = true, coords = vec3(615.134583, 109.116829, 92.872810), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(630.826721, 213.880066, 97.0),
+            vec3(665.885010, 201.378250, 97.0),
+            vec3(616.996216, 67.125282, 97.0),
+            vec3(588.874451, 81.070320, 97.0),
+        }
+    },
+    { -- Cliton Avenue
+        blip = { enabled = true, coords = vec3(372.536835, 284.296448, 103.203506), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(401.657776, 290.439514, 100.0),
+            vec3(358.911255, 303.160370, 100.0),
+            vec3(348.852570, 270.497375, 100.0),
+            vec3(387.394379, 256.395691, 100.0),
+        }
+    },
+    { -- Eclipse Blv
+        blip = { enabled = true, coords = vec3(-338.921478, 282.899414, 85.530602), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-325.022064, 268.769440, 85.0),
+            vec3(-353.296661, 260.102539, 85.0),
+            vec3(-353.668793, 301.469971, 85.0),
+            vec3(-325.743683, 309.923370, 85.0),
+        }
+    },
+    { -- Great Ocean
+        blip = { enabled = true, coords = vec3(-2038.642334, -459.027466, 11.415299), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-2052.294189, -427.769043, 10.0),
+            vec3(-2077.215576, -456.211060, 10.0),
+            vec3(-2003.278076, -518.308105, 10.0),
+            vec3(-1980.806641, -487.171661, 10.0),
+        }
+    },
+    { -- Sandy Shores
+        blip = { enabled = true, coords = vec3(1471.473022, 3735.903076, 33.662392), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(1440.290405, 3733.999268, 32.0),
+            vec3(1445.662231, 3713.218994, 32.0),
+            vec3(1573.176636, 3789.697266, 32.0),
+            vec3(1568.067017, 3802.541016, 32.0),
+        }
+    },
+    { -- Shandy Shores 2
+        blip = { enabled = true, coords = vec3(1955.395142, 3764.802490, 32.202957), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(1945.207031, 3753.056885, 31.0),
+            vec3(1970.678467, 3767.325195, 31.0),
+            vec3(1965.546997, 3782.016357, 31.0),
+            vec3(1941.906494, 3768.998779, 31.0),
+        }
+    },
+    { -- Shandy Shores 3
+        blip = { enabled = true, coords = vec3(945.163086, 3613.345459, 32.655365), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(954.997070, 3604.355713, 31.0),
+            vec3(954.827271, 3626.894531, 31.0),
+            vec3(937.041626, 3627.040527, 31.0),
+            vec3(933.888428, 3605.751709, 31.0),
+        }
+    },
+    { -- Grapeseed
+        blip = { enabled = true, coords = vec3(1691.058105, 4770.383301, 41.921467), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(1682.131226, 4811.453125, 40.0),
+            vec3(1688.631836, 4751.535156, 40.0),
+            vec3(1733.750488, 4751.434082, 40.0),
+            vec3(1732.956299, 4811.779297, 40.0),
+        }
+    },
+    { -- Paleto
+        blip = { enabled = true, coords = vec3(148.851059, 6604.335938, 31.865322), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(152.921677, 6548.202148, 30.0),
+            vec3(213.198807, 6575.338379, 30.0),
+            vec3(209.056961, 6635.750000, 30.0),
+            vec3(160.543625, 6664.841797, 30.0),
+            vec3(98.185837, 6606.003418, 30.0),
+        }
+    },
+    { -- Paleto 2
+        blip = { enabled = true, coords = vec3(58.688511, 6388.202637, 31.231415), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(66.763702, 6417.926758, 30.0),
+            vec3(112.037506, 6376.403320, 30.0),
+            vec3(-12.531187, 6304.721191, 30.0),
+            vec3(-34.199459, 6321.539063, 30.0),
+        }
+    },
+    { -- Vespucci Beach
+        blip = { enabled = true, coords = vec3(-1664.269531, -893.581848, 8.592880), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-1731.424927, -903.094238, 7.0),
+            vec3(-1703.446899, -945.722290, 7.0),
+            vec3(-1632.971069, -972.037781, 7.0),
+            vec3(-1562.020386, -887.813416, 7.0),
+            vec3(-1653.956299, -810.959351, 7.0),
+        }
+    },
+    { -- Vespucci Beach 2
+        blip = { enabled = true, coords = vec3(-1187.038330, -1489.287598, 4.379669), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-1191.339355, -1516.784058, 4.0),
+            vec3(-1162.784790, -1499.505493, 4.0),
+            vec3(-1181.851807, -1461.172852, 4.0),
+            vec3(-1211.270508, -1480.848633, 4.0),
+        }
+    },
+    { -- Premium Deluxe Motorsport
+        blip = { enabled = true, coords = vec3(-52.504021, -1116.514038, 26.433533), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-36.714436, -1118.177856, 25.0),
+            vec3(-32.803234, -1107.764282, 25.0),
+            vec3(-57.807865, -1098.556885, 25.0),
+            vec3(-67.795540, -1116.995239, 25.0),
+        }
+    },
+    { -- Los Santos Customs
+        blip = { enabled = true, coords = vec3(-383.536926, -135.976120, 38.685135), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-378.163361, -150.679703, 37.0),
+            vec3(-371.226929, -148.501892, 37.0),
+            vec3(-388.584778, -114.278358, 37.0),
+            vec3(-396.512573, -117.987129, 37.0),
+        }
+    },
+    { -- Lust resort
+        blip = { enabled = true, coords = vec3(-611.152649, 193.689606, 70.679947), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(-637.249146, 180.017746, 65.0),
+            vec3(-581.992249, 180.760376, 65.0),
+            vec3(-586.315491, 203.325699, 65.0),
+            vec3(-638.153198, 203.917068, 65.0),
+        }
+    },
+    { -- Motor Motel
+        blip = { enabled = true, coords = vec3(1126.615845, 2662.493408, 37.999714), sprite = 357, color = 0, scale = 0.6, display = 4 },
+        points = {
+            vec3(1140.977661, 2676.465332, 38.0),
+            vec3(1092.572754, 2676.362061, 38.0),
+            vec3(1089.846436, 2660.285156, 38.0),
+            vec3(1107.917358, 2658.868896, 38.0),
+            vec3(1107.329346, 2642.791260, 38.0),
+            vec3(1140.382935, 2642.801514, 38.0),
+        }
+    },
+}
+
+Config.impoundJobs = { 'police', 'fbi' } -- The jobs that can impound vehicles and take impounded vehicles out
+Config.impounds = {
+    {
+        blip = { enabled = true, sprite = 68, color = 3, scale = 0.6, display = 4 },
+        ped = { coords = vec4(403.71, -1625.73, 28.29, 177.97), model = 'csb_cop', scenario = 'WORLD_HUMAN_CLIPBOARD' },
+        spawnCoords = vec4(410.2, -1635.88, 29.29, 212.56),
+    },
+}
+```

@@ -1,0 +1,32 @@
+## Main config
+config.lua is the Configuration file of the script
+```lua filename="mt-nitrous/config.lua"
+Config = Config or {}
+
+Config.core = 'qb' -- qb, qbx or esx (if you use older version of qbox pls use as qb and change the core name to your core name)
+Config.coreName = 'qbx-core' -- Your core resource folder name qb-core, qbx-core, es_extended, ...
+
+Config.progressPosition = 'bottom'
+Config.notifyPosition = 'top-right'
+
+Config.turboNeeded = true
+
+Config.fullBottleItem = 'nitrous_bottle'
+Config.emptyBottleItem = 'empty_nitrous_bottle'
+Config.nitrousColorItem = 'nitrous_purge_color'
+
+Config.installNitrousTime = 5000
+
+Config.nitrousCooldown = 5000
+Config.nitrousUseRate = 0.4
+Config.purgeUseRate = 0.1
+Config.boostPower = {
+    2.0,
+    5.0,
+    8.0,
+}
+
+Config.useNitrousKey = 'LCONTROL'
+Config.changeBoostLevelKeys = 'PAGEUP'
+Config.changeModeKey = 'LSHIFT'
+```
