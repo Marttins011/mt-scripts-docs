@@ -1,0 +1,22 @@
+# Create ped
+Just create a ped with sent info
+
+## Client exports
+
+Create ped
+```lua
+exports.mt_lib:createPed(coords, model, anim)
+```
+- coords: `table` (`vector`)
+    - Coordinates to spawn the ped
+- model: `string`
+    - Ped model
+- anim: `table`
+    - dict: `string`
+        - Animation dictionary
+    - clip: `string`
+        - Animation name/clip
+    - scenario: `string`
+        - Scenario name if using scenarion instead of anim
+- return: `number`
+    - Ped entity index
