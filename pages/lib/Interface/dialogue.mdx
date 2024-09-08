@@ -27,3 +27,46 @@ exports.mt_lib:showDialogue(data)
             - If the UI should close after using the option
         - action: `function`
             - Function to execute when clicking the option
+
+Usage example:
+```lua copy
+exports.ox_target:addLocalEntity(ped, {
+    {
+        label = "Falar com a Maria",
+        icon = "fas fa-refresh",
+        onSelect = function()
+            exports.mt_lib:showDialogue({
+                ped = ped,
+                label = 'Maria Fernanda',
+                speech = 'How can I help sweety?',
+                options = {
+                    {
+                        id = 'sell',
+                        label = 'I want to sell fruits',
+                        icon = 'apple-alt',
+                        close = true,
+                        action = function()
+                            -- Code
+                        end
+                    },
+                    {
+                        id = 'buy',
+                        label = 'I want to buy seeds',
+                        icon = 'seedling',
+                        close = true,
+                        action = function()
+                            -- Code
+                        end
+                    },
+                    {
+                        id = 'close',
+                        label = 'I don't need anything',
+                        icon = 'ban',
+                        close = true,
+                    },
+                }
+            })
+        end
+    }
+})
+```
