@@ -5,7 +5,6 @@
     "type": "separator"
   },
   "containers": "MT Containers",
-  "speakers": "MT Speakers",
   "nitrous": "MT Nitrous",
   "hud": "MT Hud 2.0",
   "restaurants": "MT Restaurants 2.0",
@@ -18,6 +17,7 @@
     "type": "separator"
   },
   "lib": "MT Lib",
+  "speakers": "MT Speakers",
   "contact": {
     "title": "Store",
     "type": "page",
