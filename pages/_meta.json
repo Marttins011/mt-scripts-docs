@@ -12,6 +12,7 @@
   "garages": "MT Garages",
   "dealerships": "MT Dealerships 2.0",
   "workshops": "MT Workshops 2.0",
+  "mining": "MT Mining",
   "free": {
     "title": "Free scripts",
     "type": "separator"
