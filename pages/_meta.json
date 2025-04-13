@@ -12,6 +12,7 @@
   "dealerships": "MT Dealerships 2.0",
   "workshops": "MT Workshops 2.0",
   "mining": "MT Mining",
+  "hunting": "MT Hunting",
   "free": {
     "title": "Free scripts",
     "type": "separator"

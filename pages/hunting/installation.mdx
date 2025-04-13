@@ -1,0 +1,192 @@
+## MT Hunting Beta Version installation
+This is the installation for our hunting script beta version
+
+# Database tables
+Run this SQL query into your server Database
+```sql copy
+CREATE TABLE `hunting_users` (
+	`identifier` VARCHAR(50) NOT NULL DEFAULT '',
+	`name` LONGTEXT NULL DEFAULT NULL,
+	`xp` INT(11) NOT NULL DEFAULT '0',
+	`totalanimals` INT(11) NOT NULL DEFAULT '0',
+	`tournamentxp` INT(11) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`identifier`) USING BTREE
+);
+
+CREATE TABLE `hunting_tournaments` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`active` INT(11) NOT NULL DEFAULT '0',
+	`winners` LONGTEXT NOT NULL,
+	`starttime` TIME NOT NULL,
+	`endtime` TIME NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+);
+```
+
+# ox_inventory items
+Add the following items into your ox_inventory/data/items.lua file
+```lua copy
+['hunting_stove'] = {
+    label = 'Hunting stove',
+    weight = 10000,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.useStove'
+    }
+},
+
+["hunting_mtlion_meat"] = {
+    label = "Lion Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_mtlion_skin"] = {
+    label = "Lion Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_deer_skin"] = {
+    label = "Deer Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_deer_meat"] = {
+    label = "Deer Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_boar_skin"] = {
+    label = "Boar Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_boar_meat"] = {
+    label = "Boar Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_coyote_skin"] = {
+    label = "Coyote Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_coyote_meat"] = {
+    label = "Coyote Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_chickenhawk_skin"] = {
+    label = "Chickenhawk Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_chickenhawk_meat"] = {
+    label = "Chickenhawk Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_rabbit_skin"] = {
+    label = "Rabbit Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_rabbit_meat"] = {
+    label = "Rabbit Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_crow_skin"] = {
+    label = "Crow Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_crow_meat"] = {
+    label = "Crow Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_pigeon_skin"] = {
+    label = "Pigeon Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_pigeon_meat"] = {
+    label = "Pigeon Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+
+["hunting_seagull_skin"] = {
+    label = "Seagull Skin",
+    weight = 800,
+    stack = true,
+    close = true
+},
+
+["hunting_seagull_meat"] = {
+    label = "Seagull Meat",
+    weight = 800,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_hunting.eatMeat'
+    }
+},
+```
+After this add the inventory items images from mt_hunting/images into the ox_inventory/web/images
