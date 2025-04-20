@@ -1,1 +1,449 @@
-# This is not done yet, just follow the files examples
+# MT Hunting config files
+Here you can see the default config and data files for the MT Hunting, not that some changes might occur during updates.
+
+# client config
+```lua
+---@class clientConfig
+---@field aimblock boolean blocks hunting weapon's aiming at players
+---@field shops table shops locations
+---@field stove table stove config
+return {
+    aimblock = true, -- blocks hunting weapon's aiming at players
+
+    shops = { -- Shops locations
+        {
+            coords = vec4(-679.07, 5834.46, 16.33, 132.2),
+            model = 'cs_hunter',
+            anim = {
+                scenario = 'WORLD_HUMAN_CLIPBOARD'
+            },
+        },
+    },
+
+    stove = {
+        model = 'prop_hobo_stove_01'
+    }
+}
+```
+
+# server config
+```lua
+---@class serverConfig
+---@field stove table stove settings
+---@field tournaments table tournaments settings
+return {
+    stove = {
+        slots = 10,
+        weight = 100 * 1000,
+        cookTime = 10, -- cook time in seconds
+    },
+
+    tournaments = {
+        prize = { -- tournaments money prizes
+            min = 2500,
+            max = 5000
+        },
+        duration = 0.01 -- duration in days
+    }
+}
+```
+
+# shared config
+```lua
+---@class sharedConfig
+---@field debug boolean enable debug mode for console messages and animals blips
+---@field menuOptions table the options to show on the menu
+---@field buyItems table items available for purchase
+---@field sellItems table items available for sale
+---@field animalsSpawn table animals spawn settings
+return {
+    debug = true, -- Enable debug mode for console messages and animals blips
+
+    menuOptions = {
+        buy = true,
+        sell = true
+    },
+
+    buyItems = { -- Items for the shop tab
+        { name = 'weapon_musket', price = 750, xp = 0 },
+        { name = 'ammo-musket', price = 5, xp = 0 },
+        { name = 'weapon_switchblade', price = 100, xp = 0 },
+        { name = 'weapon_sniperrifle', price = 1000, xp = 1000 },
+        { name = 'ammo-sniper', price = 10, xp = 1000 },
+        { name = 'weapon_knife', price = 500, xp = 500 },
+        { name = 'hunting_stove', price = 1500, xp = 250 },
+    },
+
+    sellItems = { -- Items for the shop sell tab
+        { name = 'hunting_deer_skin', price = 500 },
+        { name = 'hunting_mtlion_skin', price = 500 },
+        { name = 'hunting_boar_skin', price = 500 },
+        { name = 'hunting_coyote_skin', price = 500 },
+        { name = 'hunting_chickenhawk_skin', price = 500 },
+        { name = 'hunting_rabbit_skin', price = 500 },
+        { name = 'hunting_crow_skin', price = 500 },
+        { name = 'hunting_pigeon_skin', price = 500 },
+        { name = 'hunting_seagull_skin', price = 500 },
+        { name = 'hunting_deer_meat', price = 200 },
+        { name = 'hunting_mtlion_meat', price = 200 },
+        { name = 'hunting_boar_meat', price = 200 },
+        { name = 'hunting_coyote_meat', price = 200 },
+        { name = 'hunting_chickenhawk_meat', price = 200 },
+        { name = 'hunting_rabbit_meat', price = 200 },
+        { name = 'hunting_crow_meat', price = 200 },
+        { name = 'hunting_pigeon_meat', price = 200 },
+        { name = 'hunting_seagull_meat', price = 200 },
+    },
+
+    animalsSpawn = { -- Animals spawn settings
+        interval = 30, -- spawn interval in seconds
+        despawnTime = 300, -- despawn time in seconds after animal dies
+
+        legal = { -- zone type
+            maxPerZone = 20, -- max animals per zone
+            chance = 100, -- spawn chance percentage (0 - 100)
+        },
+
+        ilegal = {
+            maxPerZone = 30,
+            chance = 80,
+        }
+    }
+}
+```
+
+# animals data
+```lua
+---@class animals
+---@field legal table legal animals table
+---@field ilegal table ilegal animals table
+
+-- The legal animals will spawn in the legal zones and the ilegal animals will spawn in the ilegal zones.
+return {
+    legal = {
+        {
+            label = 'Deer',
+
+            model = 'a_c_deer',
+            skinTime = 7500,
+
+            skin = 'hunting_deer_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_deer_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 0,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Boar',
+
+            model = 'a_c_boar',
+            skinTime = 7500,
+
+            skin = 'hunting_boar_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_boar_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 0,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Rabbit',
+
+            model = 'a_c_rabbit_01',
+            skinTime = 3000,
+
+            skin = 'hunting_rabbit_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_rabbit_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 0,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Pigeon',
+
+            model = 'a_c_pigeon',
+            skinTime = 3000,
+
+            skin = 'hunting_pigeon_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_pigeon_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 0,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        }
+    },
+
+    ilegal = {
+        {
+            label = 'Mountain Lion',
+
+            model = 'a_c_mtlion',
+            skinTime = 5000,
+
+            skin = 'hunting_mtlion_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_mtlion_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 500,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Coyote',
+
+            model = 'a_c_coyote',
+            skinTime = 5000,
+
+            skin = 'hunting_coyote_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_coyote_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 250,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Chicken Hawk',
+
+            model = 'a_c_chickenhawk',
+            skinTime = 2500,
+
+            skin = 'hunting_chickenhawk_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_chickenhawk_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 500,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Crow',
+
+            model = 'a_c_crow',
+            skinTime = 2500,
+
+            skin = 'hunting_crow_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_crow_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 250,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        },
+        {
+            label = 'Seagull',
+
+            model = 'a_c_seagull',
+            skinTime = 2500,
+
+            skin = 'hunting_seagull_skin',
+            skinPrice = 100,
+            skinQuantity = {
+                min = 5,
+                max = 10
+            },
+
+            meat = 'hunting_seagull_meat',
+            meatPrice = 50,
+            meatQuantity = {
+                min = 10,
+                max = 15
+            },
+
+            needXp = 500,
+            xpGain = {
+                min = 1,
+                max = 5
+            },
+
+            minHunger = 10,
+            maxHunger = 30
+        }
+    }
+}
+```
+
+# zones data
+```lua
+---@class zones
+---@field legal table<string, { coords: vector3, radius: number }>
+---@field ilegal table<string, { coords: vector3, radius: number }>
+
+-- This is the GTA MAP zones where the animals will spawn.
+-- Zone names based on: https://docs.fivem.net/natives/?_0x98CD1D2934B76CC1
+-- The coords and radius are not 100% accurate, they are just a rough estimate.
+return {
+    legal = {
+        ['CMSW']     = { coords = vec3(-2086.0, 2617.5, 2.0), radius = 350 },
+        ['MTGORDO']  = { coords = vec3(3149.0, 4465.0, 42.0), radius = 400 },
+        ['MTJOSE']   = { coords = vec3(2736.0, 5977.0, 72.0), radius = 350 },
+        ['PALFOR']   = { coords = vec3(-685.0, 5830.0, 17.0), radius = 400 },
+        ['SANCHIA']  = { coords = vec3(2675.0, 1492.0, 31.0), radius = 300 },
+        ['CCREAK']   = { coords = vec3(-936.0, 4449.0, 15.0), radius = 350 },
+        ['GREATC']   = { coords = vec3(-1000.0, 4400.0, 25.0), radius = 350 },
+        ['SLAB']     = { coords = vec3(1100.0, 2650.0, 38.0), radius = 300 },
+        ['TATAMO']   = { coords = vec3(-1084.0, 3585.0, 34.0), radius = 500 },
+        ['WINDF']    = { coords = vec3(2246.0, 3859.0, 41.0), radius = 250 },
+        ['TONGVAH']  = { coords = vec3(-1165.0, 4700.0, 220.0), radius = 300 },
+        ['CHIL']     = { coords = vec3(-100.0, 4350.0, 85.0), radius = 350 },
+        ['RGLEN']    = { coords = vec3(-1550.0, 4400.0, 20.0), radius = 300 },
+        ['GALFISH']  = { coords = vec3(1325.0, 4300.0, 36.0), radius = 300 },
+    },
+
+    ilegal = {
+        ['PALHIGH']  = { coords = vec3(-170.0, 6144.0, 42.0), radius = 400 },
+        ['MTCHIL']   = { coords = vec3(450.0, 5615.0, 796.0), radius = 600 },
+        ['GRAPES']   = { coords = vec3(2125.0, 4980.0, 41.0), radius = 350 },
+        ['LACT']     = { coords = vec3(1690.0, 6400.0, 31.0), radius = 300 },
+        ['NCHU']     = { coords = vec3(-2020.0, 1975.0, 140.0), radius = 300 },
+        ['PROCOB']   = { coords = vec3(220.0, 3300.0, 41.0), radius = 300 },
+        ['ZQ_UAR']   = { coords = vec3(3500.0, 3750.0, 38.0), radius = 350 }
+    }
+}
+```
+
+# weapons data
+```lua
+---@class weapons
+---@field knifes table<string> List of knife weapons
+---@field rifles table<string> List of rifle weapons
+
+-- The weapons that will be used to kill and skin the animals
+return {
+    knifes = {
+        'weapon_switchblade',
+        'weapon_knife'
+    },
+
+    rifles = {
+        'weapon_musket',
+        'weapon_sniperrifle'
+    }
+}
+```

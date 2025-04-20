@@ -10,15 +10,17 @@ CREATE TABLE `hunting_users` (
 	`xp` INT(11) NOT NULL DEFAULT '0',
 	`totalanimals` INT(11) NOT NULL DEFAULT '0',
 	`tournamentxp` INT(11) NOT NULL DEFAULT '0',
+	`tournamentanimals` INT(11) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`identifier`) USING BTREE
 );
 
 CREATE TABLE `hunting_tournaments` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`active` INT(11) NOT NULL DEFAULT '0',
-	`winners` LONGTEXT NOT NULL,
+	`winner` VARCHAR(50) NOT NULL DEFAULT '',
+	`prize` INT(11) NOT NULL DEFAULT '0',
 	`starttime` TIME NOT NULL,
 	`endtime` TIME NOT NULL,
+	`finished` INT(11) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`) USING BTREE
 );
 ```
