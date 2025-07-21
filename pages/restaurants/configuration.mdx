@@ -393,10 +393,12 @@ Config.restaurants = Config.restaurants or {}
 
 -- This config is just an example of how to create a restaurant.
 
-Config.restaurants.examplejob = { -- Restaurant ID (needs to be the same as the job and needs to be unique!)
-    enabled = false, -- If flase this restaurant will not be enable
+-- For more info check: https://mt-scripts-documentations.gitbook.io/mt-script-documentation/
+
+Config.restaurants[#Config.restaurants + 1] = { -- Auto-assigns restaurant ID based on job field
+    enabled = false, -- If false this restaurant will not be enabled
     label = 'Example Label', -- The display name of the restaurant
-    job = 'examplejob', -- The job of the restaurant (Need to be created at qb-core/shared/jobs.lua)
+    job = 'examplejob', -- The job of the restaurant (will become the restaurant ID)
     ingredients = Config.ingredients.globalIngredients, -- The restaurants ingredients (Can be edited or created at ingredients.lua)
     maxIngredients = 6, -- Limit of ingredients per recipe
     maxRecipes = 10, -- Limit of recipes that the restaurant can have (false if don't want limit)
