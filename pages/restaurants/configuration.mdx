@@ -389,13 +389,11 @@ Config.shops = {
 ## Restaurants folder
 This is an example of restaurant config, follow the example and read the comments to understand what does every field and how to create your own restaurant
 ```lua filename="mt_restaurants/restaurants/..." copy
-Config.restaurants = Config.restaurants or {}
-
 -- This config is just an example of how to create a restaurant.
 
 -- For more info check: https://mt-scripts-documentations.gitbook.io/mt-script-documentation/
 
-Config.restaurants[#Config.restaurants + 1] = { -- Auto-assigns restaurant ID based on job field
+local restaurantConfig = { -- Auto-assigns restaurant ID based on job field
     enabled = false, -- If false this restaurant will not be enabled
     label = 'Example Label', -- The display name of the restaurant
     job = 'examplejob', -- The job of the restaurant (will become the restaurant ID)
@@ -469,4 +467,7 @@ Config.restaurants[#Config.restaurants + 1] = { -- Auto-assigns restaurant ID ba
         vec4(-1199.55, -1132.55, 7.40, 109.55),
     },
 }
+
+-- Add this restaurant to the configuration
+AddRestaurant(restaurantConfig)
 ```
