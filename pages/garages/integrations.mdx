@@ -30,7 +30,7 @@ end
 # YSeries/YPhone
 **Step 1**
 Jump into yseries/client/apps/framework/garage and create a file named: mt_garages.lua
-If in there there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
+If there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
 ```lua
 CreateThread(function()
     if Config.Garages ~= 'mt_garages' then return end
@@ -69,7 +69,7 @@ end)
 
 **Step 2**
 Jump into yseries/server/apps/framework/garage and create a file named: mt_garages.lua
-If in there there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
+If there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
 ```lua
 CreateThread(function()
     if Config.Garages ~= 'mt_garages' then return end
@@ -208,4 +208,39 @@ CreateThread(function()
         end
     end)
 end)
+```
+
+# Nolag Properties
+Jump into nolag_properties/custom/garages and create the file mt_garages.lua and paste the code bellow
+If in there's already that file just ignore this
+```lua
+if Config.Garage ~= "mt_garages" then
+    return
+end
+
+Config.Functions["OpenGarageMenu"] = {
+    type = "outside", -- inside or outside
+    zone = true, -- If the interaction is a zone or ox_target
+    maxPerProperty = 1, -- The maximum amount of garage menu's per property
+    radius = 2.0, -- The radius of the interaction
+    requireKeys = true, -- If the player needs to have keys to interact with the interaction
+    label = "Garage Menu",
+    icon = "fas fa-car",
+    onSelect = function(property)
+        if property.metadata.lockdown and Config.PoliceLockdown.DisableGarage then
+            Framework.Notify({
+                description = locale("property_under_police_lockdown"),
+                type = "error"
+            })
+            return
+        end
+
+        if cache.vehicle then
+            exports.mt_garages:storeVehicleInGarage('property_' .. property.id)
+        else
+            local PlayerCoords = GetEntityCoords(cache.ped)
+            exports.mt_garages:openGarageMenu('property_' .. property.id)
+        end
+    end,
+}
 ```
