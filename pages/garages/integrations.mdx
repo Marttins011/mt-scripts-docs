@@ -1,7 +1,7 @@
-## Default phone integrations
+# Default phone integrations
 This is the integrations we've prepared to integrate to common FiveM phones, if your phone is not here, check our discord's communit snippets or do yourself the integration with ease using our exports in the exports page.
 
-# LB Phone
+## LB Phone
 **Step 1**
 Jump into lb-phone/server/custom/frameworks/(your framework)/vehicles.lua
 There in the `GetPlayerVehicles` function replace the query getting the vehicles from the database, for example:
@@ -27,7 +27,7 @@ local function FindCar(plate)
 end
 ```
 
-# YSeries/YPhone
+## YSeries/YPhone
 **Step 1**
 Jump into yseries/client/apps/framework/garage and create a file named: mt_garages.lua
 If there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
@@ -210,7 +210,7 @@ CreateThread(function()
 end)
 ```
 
-# Nolag Properties
+## Nolag Properties
 Jump into nolag_properties/custom/garages and create the file mt_garages.lua and paste the code bellow
 If in there's already that file just ignore this
 ```lua
