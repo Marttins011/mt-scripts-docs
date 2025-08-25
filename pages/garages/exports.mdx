@@ -1,12 +1,13 @@
 ## Sever exports
 Gets all player vehicle or if using garage id it'll only get the vehicles on that garage
 ```lua copy
----@param value boolean
+---@param source integer
+---@param garage string
 exports.mt_garages:getVehicles(source, garage)
 ```
 ## Client exports
 Use the vehicle last location take out, usefull to integrate with phones garages app in the locate vehicle functions
 ```lua copy
----@param value boolean
+---@param plate string
 exports.mt_garages:takeVehicleOut(plate)
 ```
