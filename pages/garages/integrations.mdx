@@ -1,0 +1,211 @@
+## Default phone integrations
+This is the integrations we've prepared to integrate to common FiveM phones, if your phone is not here, check our discord's communit snippets or do yourself the integration with ease using our exports in the exports page.
+
+# LB Phone
+**Step 1**
+Jump into lb-phone/server/custom/frameworks/(your framework)/vehicles.lua
+There in the `GetPlayerVehicles` function replace the query getting the vehicles from the database, for example:
+```lua
+local vehicles = MySQL.query.await(
+    "SELECT * FROM player_vehicles WHERE citizenid = ?",
+    { GetIdentifier(source) }
+)
+```
+With:
+```lua
+local vehicles = exports.mt_garages:getVehicles(source)
+```
+
+**Step 2**
+Jump into lb-phone/client/apps/framework/garage.lua and replace the `FindCar` function with:
+```lua
+---Function to find a car
+---@param plate string
+---@return vector3 | false
+local function FindCar(plate)
+    return exports.mt_garages:takeVehicleOut(plate)
+end
+```
+
+# YSeries/YPhone
+**Step 1**
+Jump into yseries/client/apps/framework/garage and create a file named: mt_garages.lua
+If in there there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
+```lua
+CreateThread(function()
+    if Config.Garages ~= 'mt_garages' then return end
+
+    debugPrint("Using mt_garages")
+
+    function GetVehicleLabel(model)
+        local vehicleLabel = GetDisplayNameFromVehicleModel(model):lower()
+
+        if not vehicleLabel or vehicleLabel == 'null' or vehicleLabel == 'carnotfound' then
+            vehicleLabel = 'Unknown'
+        else
+            local text = GetLabelText(vehicleLabel)
+            if text and text:lower() ~= 'null' then
+                vehicleLabel = text
+            end
+        end
+        return vehicleLabel
+    end
+
+    function FindVehicleByPlate(plate)
+        return exports.mt_garages:takeVehicleOut(plate)
+    end
+
+    function MapVehiclesData(vehicles)
+        if vehicles then
+            for i = 1, #vehicles do
+                vehicles[i].model = GetVehicleLabel(vehicles[i].model)
+            end
+        end
+
+        return vehicles
+    end
+end)
+```
+
+**Step 2**
+Jump into yseries/server/apps/framework/garage and create a file named: mt_garages.lua
+If in there there's already an mt_garages.lua file, then you can ignore this steps, otherwise, on that file paste this code:
+```lua
+CreateThread(function()
+    if Config.Garages ~= 'mt_garages' then return end
+
+    debugPrint("Using mt_garages")
+
+    function GetPlayerVehicles(source)
+        local vehicles = exports.mt_garages:getVehicles(source)
+
+        if not vehicles then
+            return nil
+        end
+
+        local VehiclesData = {}
+        for _, v in pairs(vehicles) do
+            local state
+            if v.state == 0 then
+                state = "outOfGarage" -- "Out of garage"
+            elseif v.state == 1 then
+                state = v.garage or "garage" -- "Garage"
+            elseif v.state == 2 then
+                state = "impounded" -- "Impounded"
+            end
+
+            local vehicle = {
+                plate = v.plate,
+                location = state,
+                type = "car",
+                statistics = {
+                    engine = math.floor(v.mods.engineHealth / 10 + 0.5),
+                    body = math.floor(v.mods.bodyHealth / 10 + 0.5),
+                    fuel = v.mods.fuelLevel
+                }
+            }
+
+            vehicle.model = tonumber(v.hash)
+            vehicle.vehicle = v.vehicle
+
+            VehiclesData[#VehiclesData + 1] = vehicle
+        end
+
+        return VehiclesData
+    end
+
+    local function IsVehicleOut(plate, vehicles)
+        if not vehicles then
+            vehicles = GetAllVehicles()
+        end
+
+        for i = 1, #vehicles do
+            local vehicle = vehicles[i]
+            if DoesEntityExist(vehicle) and GetVehicleNumberPlateText(vehicle):gsub('%s+', '') == plate:gsub('%s+', '') then
+                return true, vehicle
+            end
+        end
+
+        return false
+    end
+
+    function GetVehicle(plate, source)
+        local playerId = Framework.GetPlayerFromId(source)?.identifier
+
+        local vehicle = MySQL.query.await([[
+            SELECT plate, mods, fuel, `hash`
+            FROM player_vehicles
+            WHERE citizenid = @citizenid AND plate = @plate AND state = 1
+        ]], {
+            ['@citizenid'] = playerId,
+            ['@plate'] = plate
+        })
+
+        if not vehicle then return nil end
+
+        local vehicleData = vehicle[1]
+
+        MySQL.query.await([[
+            UPDATE player_vehicles
+            SET state = 0
+            WHERE plate = @plate
+        ]], {
+            ['@plate'] = plate
+        })
+
+        return vehicleData
+    end
+
+    lib.callback.register('yseries:server:garage:get-vehicles', function(source)
+        local vehicles = GetPlayerVehicles(source)
+        if vehicles and #vehicles > 0 then
+            local allVehicles = GetAllVehicles()
+
+            for i = 1, #vehicles do
+                if IsVehicleOut(vehicles?[i].plate, allVehicles) then
+                    vehicles[i].location = 'Out of garage'
+                end
+            end
+        end
+
+        return vehicles
+    end)
+
+    lib.callback.register('yseries:server:garage:find-vehicle-by-plate', function(source, plate)
+        local out, vehicle = IsVehicleOut(plate)
+        if out and vehicle then
+            return GetEntityCoords(vehicle)
+        elseif not out then
+            local citizenId = Framework.GetPlayerFromId(source)?.identifier
+            local exist, allGarages = pcall(function()
+                return exports['qb-garages']:getAllGarages()
+            end)
+
+            if not exist then return false end
+
+            local garageVehicle = MySQL.query.await([[
+                SELECT garage
+                FROM player_vehicles
+                WHERE citizenid = @citizenid AND plate = @plate
+            ]], {
+                ['@citizenid'] = citizenId,
+                ['@plate'] = plate
+            })
+
+            if garageVehicle and allGarages then
+                local garageData = garageVehicle[1]
+
+                for k, v in pairs(allGarages) do
+                    if v.name == garageData.garage then
+                        return allGarages[k].takeVehicle
+                    end
+                end
+            end
+
+            return false
+        else
+            return false
+        end
+    end)
+end)
+```

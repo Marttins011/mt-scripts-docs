@@ -1,36 +1,12 @@
-## Client exports
-Set player as inside of an garage
+## Sever exports
+Gets all player vehicle or if using garage id it'll only get the vehicles on that garage
 ```lua copy
 ---@param value boolean
-exports.mt_garages:inGarage(value)
+exports.mt_garages:getVehicles(source, garage)
 ```
-
-Open garage menu
+## Client exports
+Use the vehicle last location take out, usefull to integrate with phones garages app in the locate vehicle functions
 ```lua copy
-exports.mt_garages:openGarageMenu()
-```
-
-Store vehicle
-```lua copy
-exports.mt_garages:storeVehicle()
-```
-
-Impound vehicle
-```lua copy
-exports.mt_garages:impoundVehicle()
-```
-
-## Server exports
-Check if vehicle is impounded
-```lua copy
----@param plate string
----@return impounded boolean
-exports.mt_garages:checkIsImpounded(plate)
-```
-
-Get vehicle last location
-```lua copy
----@param plate string
----@return coords table
-exports.mt_garages:getVehicleLastLocation(plate)
+---@param value boolean
+exports.mt_garages:takeVehicleOut(plate)
 ```
