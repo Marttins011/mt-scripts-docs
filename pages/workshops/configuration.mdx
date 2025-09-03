@@ -1341,12 +1341,10 @@ Config.stations = {
 ## Workshops folder
 This is an example of workshop config, follow the example and read the comments to understand what does every field and how to create your own workshop
 ```lua filename="mt_workshops/workshops/..." copy
-Config.workshops = Config.workshops or {}
-
 -- This config is made to work with the Kiiya's LS Auto Shop MLO
 -- Check: https://kiiya.tebex.io/package/5845981
 
-Config.workshops.examplejob = { -- Workshop ID, needs to be the same as the job!!
+local workshopConfig = { -- Workshop ID, needs to be the same as the job!!
     enabled = true, -- enable the workshop or not
     label = 'Example workshop', -- Label that will show on the map blip and etc
     job = 'examplejob', -- Job that will be able to access everything in the workshop
@@ -1389,4 +1387,6 @@ Config.workshops.examplejob = { -- Workshop ID, needs to be the same as the job!
         },
     },
 }
+
+AddWorkshop(workshopConfig)
 ```
