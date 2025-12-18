@@ -1,0 +1,89 @@
+## MT Hunting Shack installation
+This is the installation for our hunting shack script
+
+# ox_inventory items
+Add the following items into your ox_inventory/data/items.lua file
+```lua copy 
+["hunting_deer"] = {
+    label = "Deer",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_mtlion"] = {
+    label = "MTLion",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_boar"] = {
+    label = "Boar",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_coyote"] = {
+    label = "Coyote",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_chickenhawk"] = {
+    label = "Chickenhawk",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_rabbit"] = {
+    label = "Rabbit",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_crow"] = {
+    label = "Crow",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_pigeon"] = {
+    label = "Pigeon",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_seagull"] = {
+    label = "Seagull",
+    weight = 10000,
+    stack = false,
+    close = true
+},
+["hunting_meat"] = {
+    label = "Meat",
+    weight = 1000,
+    stack = true,
+    close = true
+},
+["hunting_skin"] = {
+    label = "Skin",
+    weight = 1000,
+    stack = true,
+    close = true
+},
+```
+
+# qb-inventory items
+Add the following items into your qb-core/shared/items.lua file
+```lua copy
+['hunting_deer'] = {['name'] = 'hunting_deer', ['label'] = 'Deer', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_deer.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Deer'},
+['hunting_mtlion'] = {['name'] = 'hunting_mtlion', ['label'] = 'MTLion', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_mtlion.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting MTLion'},
+['hunting_boar'] = {['name'] = 'hunting_boar', ['label'] = 'Boar', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_boar.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Boar'},
+['hunting_coyote'] = {['name'] = 'hunting_coyote', ['label'] = 'Coyote', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_coyote.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Coyote'},
+['hunting_chickenhawk'] = {['name'] = 'hunting_chickenhawk', ['label'] = 'Chicken Hawk', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_chickenhawk.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Chicken Hawk'},
+['hunting_rabbit'] = {['name'] = 'hunting_rabbit', ['label'] = 'Rabbit', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_rabbit.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Rabbit'},
+['hunting_crow'] = {['name'] = 'hunting_crow', ['label'] = 'Crow', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_crow.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Crow'},
+['hunting_pigeon'] = {['name'] = 'hunting_pigeon', ['label'] = 'Pigeon', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_pigeon.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Pigeon'},
+['hunting_seagull'] = {['name'] = 'hunting_seagull', ['label'] = 'Seagull', ['weight'] = 10000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_seagull.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Seagull'},
+['hunting_meat'] = {['name'] = 'hunting_meat', ['label'] = 'Meat', ['weight'] = 1000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_meat.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Meat'},
+['hunting_skin'] = {['name'] = 'hunting_skin', ['label'] = 'Skin', ['weight'] = 1000, ["degrade"] = 1.0, ['type'] = 'item', ['image'] = 'images/hunting_skin.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Hunting Skin'},
+```

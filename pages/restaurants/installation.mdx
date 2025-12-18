@@ -499,27 +499,7 @@ Remain in ox_inventory/client.lua and search for the following around line 1630
 ```lua filename="ox_inventory/client.lua" copy
 'ox_inventory:startCrafting'
 ```
-Here you want to replace this
-```lua filename="ox_inventory/client.lua" copy
-lib.callback.register('ox_inventory:startCrafting', function(id, recipe)
-	recipe = CraftingBenches[id].items[recipe]
-
-	return lib.progressCircle({
-		label = locale('crafting_item', recipe.metadata?.label or Items[recipe.name].label),
-		duration = recipe.duration or 3000,
-		canCancel = true,
-		disable = {
-			move = true,
-			combat = true,
-		},
-		anim = {
-			dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
-			clip = 'machinic_loop_mechandplayer',
-		}
-	})
-end)
-```
-With this
+There you replace the whole callback with this
 ```lua filename="ox_inventory/client.lua" copy
 lib.callback.register('ox_inventory:startCrafting', function(recipe)
 	return lib.progressCircle({
@@ -544,7 +524,7 @@ Now head over to ox_inventory/modules/crafting/server.lua and find this function
 ```lua filename="ox_inventory/modules/crafting/server.lua" copy
 function createCraftingBench
 ```
-Now replace that function with this
+Now replace that whole function with this
 ```lua filename="ox_inventory/modules/crafting/server.lua" copy
 local function createCraftingBench(id, data)
 	CraftingBenches[id] = {}
@@ -592,34 +572,7 @@ exports('RegisterCraftStation', createCraftingBench)
 **Step 4**
 Stay inside ox_inventory/modules/crafting/server.lua and find this event
 ```lua filename="ox_inventory/modules/craftting/server.lua" copy
-lib.callback.register('ox_inventory:openCraftingBench', function(source, id, index)
-	local left, bench = Inventory(source), CraftingBenches[id]
-
-	if not left then return end
-
-	if bench then
-		local groups = bench.groups
-		local coords = getCraftingCoords(source, bench, index)
-
-		if not coords then return end
-
-		if groups and not server.hasGroup(left, groups) then return end
-		if #(GetEntityCoords(GetPlayerPed(source)) - coords) > 10 then return end
-
-		if left.open and left.open ~= source then
-			local inv = Inventory(left.open) --[[@as OxInventory]]
-
-			-- Why would the player inventory open with an invalid target? Can't repro but whatever.
-			if inv?.player then
-				inv:closeInventory()
-			end
-		end
-
-		left:openInventory(left)
-	end
-
-	return { label = left.label, type = left.type, slots = left.slots, weight = left.weight, maxWeight = left.maxWeight }
-end)
+ox_inventory:openCraftingBench
 ```
 Then replace the event with the following code
 ```lua filename="ox_inventory/modules/craftting/server.lua" copy
@@ -663,7 +616,7 @@ Replace that event / code with this
 local success = lib.callback.await('ox_inventory:startCrafting', source, recipe)
 ```
 
-**Step 6**
+## OX Inventory images provider changes
 Head to ox_inventory/modules/utils/server.lua and at validHosts add this
 ```lua filename="ox_inventory/modules/utils/server.lua" copy
 ['k8kmkccdhq4bghqi.public.blob.vercel-storage.com'] = true,

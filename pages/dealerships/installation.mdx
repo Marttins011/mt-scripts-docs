@@ -32,6 +32,14 @@ CREATE TABLE `dealership_imports` (
 	PRIMARY KEY (`id`) USING BTREE,
 	UNIQUE INDEX `id` (`id`) USING BTREE
 );
+
+CREATE TABLE `dealership_showroom` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`vehicleID` LONGTEXT,
+	`vehicle` MEDIUMTEXT,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `id` (`id`) USING BTREE
+);
 ```
 
 ## ESX Vehicles SQL
