@@ -13,6 +13,7 @@
   "mining": "MT Mining",
   "huntingshack": "MT Hunting Shack",
   "hunting": "MT Hunting",
+  "hud": "MT HUD",
   "free": {
     "title": "Free scripts",
     "type": "separator"
