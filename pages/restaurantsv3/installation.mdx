@@ -1,0 +1,334 @@
+# Learn how to install our Restaurants v3
+
+## Inventory Items
+This are the items to add in the `ox_inventory\data\items.lua`
+
+**Required items**
+```lua copy
+["restaurant_food"] = {
+    label = "Restaurant food",
+    useable = true,
+    weight = 400,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_restaurants.useFood'
+    },
+    degrade = 1440 -- 24 hours
+},
+["restaurant_box"] = {
+    label = "Food box",
+    useLabel = 'Abrir',
+    useable = true,
+    weight = 200,
+    stack = true,
+    close = true
+},
+```
+
+**Ingredients item**
+This items are optinal, you can edit the ingredients in the `mt_restaurants\data\ingredients.lua`
+```lua copy
+-- Restaurants food ingredients
+['meat'] = {
+    label = 'Meat',
+    weight = 500,
+    stack = true,
+    close = true,
+    description = '',
+},
+['fish'] = {
+    label = 'Fish',
+    weight = 500,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_meat'] = {
+    label = 'Sliced meat',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_fish'] = {
+    label = 'Sliced fish',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_onion'] = {
+    label = 'Sliced onion',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_carrot'] = {
+    label = 'Sliced carrot',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_lettuce'] = {
+    label = 'Sliced lettuce',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_cucumber'] = {
+    label = 'Sliced cucumber',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_potato'] = {
+    label = 'Sliced potato',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_tomato'] = {
+    label = 'Sliced tomato',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_coffee'] = {
+    label = 'Coffee powder',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_wheat'] = {
+    label = 'Flour',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_corn'] = {
+    label = 'Corn flour',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_strawberry'] = {
+    label = 'Sliced strawberry',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_watermelon'] = {
+    label = 'Sliced watermelon',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_soya'] = {
+    label = 'Tofu',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_pineapple'] = {
+    label = 'Sliced pineapple',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_apple'] = {
+    label = 'Sliced apple',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_pear'] = {
+    label = 'Sliced pear',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_lemon'] = {
+    label = 'Sliced lemon',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_banana'] = {
+    label = 'Sliced banana',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_peach'] = {
+    label = 'Sliced peach',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_mango'] = {
+    label = 'Sliced mango',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['sliced_orange'] = {
+    label = 'Sliced orange',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['ice_cubes'] = {
+    label = 'Ice cubes',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+
+-- Farming vegetables
+['onion'] = {
+    label = 'Onion',
+    weight = 150,
+    stack = true,
+    close = true,
+    description = '',
+},
+['carrot'] = {
+    label = 'Carrot',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['lettuce'] = {
+    label = 'Lettuce',
+    weight = 250,
+    stack = true,
+    close = true,
+    description = '',
+},
+['cucumber'] = {
+    label = 'Cucumber',
+    weight = 200,
+    stack = true,
+    close = true,
+    description = '',
+},
+['potato'] = {
+    label = 'Potato',
+    weight = 150,
+    stack = true,
+    close = true,
+    description = '',
+},
+['tomato'] = {
+    label = 'Tomto',
+    weight = 100,
+    stack = true,
+    close = true,
+    description = '',
+},
+['coffee_beans'] = {
+    label = 'Coffee beans',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['wheat'] = {
+    label = 'Wheat',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['corn'] = {
+    label = 'Corn',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['strawberry'] = {
+    label = 'Strawberry',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['pineapple'] = {
+    label = 'Pineapple',
+    weight = 10,
+    stack = true,
+    close = true,
+    description = '',
+},
+['watermelon'] = {
+    label = 'Watermelon',
+    weight = 5,
+    stack = true,
+    close = true,
+    description = '',
+},
+['soya'] = {
+    label = 'Soy beans',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['eggplant'] = {
+    label = 'Beet',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['blueberry'] = {
+    label = 'Blueberry',
+    weight = 8,
+    stack = true,
+    close = true,
+    description = '',
+},
+['pumpkin'] = {
+    label = 'Pumpkin',
+    weight = 2000,
+    stack = true,
+    close = true,
+    description = '',
+},
+```
+
+## Inventory images provider
+In the `ox_inventory\modules\utils\server.lua`, add this new provider URL.
+```lua copy
+['k8kmkccdhq4bghqi.public.blob.vercel-storage.com'] = true,
+['upload.mt-scripts.com'] = true,
+```
+
+<br />
+**That's it, the script is installed!**
+<p>Everything else in the script will be automatically configured: framework, sql, jobs, etc.</p>
+<p>If you need help with anything extra, please open ticket in our discord.</p>

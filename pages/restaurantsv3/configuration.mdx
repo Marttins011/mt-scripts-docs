@@ -1,0 +1,159 @@
+# Our restaurants script v3 configuration types
+
+## Recipes Ingredients
+```lua filename="mt_restaurants\data\ingredients.lua"
+---@class NeededItem
+---@field count number Amount required
+---@field price number Price for the ingredient
+
+---@alias IngredientType 'food' | 'drink'
+
+---@class Ingredients
+---@field needCut boolean If it will show in the prepare station to cut or not
+---@field neededItems? NeededItem[] The items that will be needed to prepare this ingredient
+---@field item string The ingredient inventory item
+---@field count? number The amount of ingredients that will be given by prepare
+---@field type IngredientType[] The available ingredient types
+---@field calories number The amount of calories of the ingredient
+---@field customBuffs? table<string, number> The buffs values
+ 
+---@class IngredientsCategories
+---@field categoryLabel string Category label
+---@field ingredients Ingredients[] Ingredients table
+
+---@type IngredientsCategories[]
+```
+
+Example category
+```lua copy
+{
+    categoryLabel = "Example ingredients category",
+    ingredients = {
+        {
+            needCut = true,
+            neededItems = {
+                exampleitem = { count = 1, price = 100 }
+            },
+            item = 'sliced_exampleitem',
+            count = 5,
+            type = { 'food', 'drink' },
+            calories = 100,
+            customBuffs = {
+                stress = 15,
+                alcohol = 20
+            }
+        }
+    }
+}
+```
+
+## Recipes Animations
+```lua filename="mt_restaurants\data\animations\recipes.lua"
+---@class Animation
+---@field dict string Animation dictionary
+---@field clip string Animation clip
+
+---@class PropConfig
+---@field model string Prop model name
+---@field pos vector3 Position offset
+---@field rot vector3 Rotation offset
+---@field bone number Ped bone ID
+
+---@class RecipeAnimation
+---@field label string Display label
+---@field animIdle Animation Idle animation
+---@field propIdle PropConfig Idle prop configuration
+---@field anim Animation Animation played when using the item
+---@field prop PropConfig Main prop configuration
+---@field prop2? PropConfig Secondary prop configuration
+
+---@type table<string, RecipeAnimation>
+```
+
+Example animation
+```lua copy
+exampleanim = {
+    label = 'Example animation',
+    animIdle = {
+        dict = 'anim@heists@humane_labs@finale@keycards',
+        clip = 'ped_a_enter_loop'
+    },
+    propIdle = {
+        model = 'prop_plastic_cup_02',
+        pos = vec3(0.136, 0.073, 0.015),
+        rot = vec3(-110.320, -33.377, -24.360),
+        bone = 18905
+    },
+    anim = {
+        dict = 'mp_player_intdrink',
+        clip = 'loop_bottle'
+    },
+    prop = {
+        model = 'prop_plastic_cup_02',
+        pos = vec3(0.123, 0.013, 0.031),
+        rot = vec3(-109.259, -29.828, -0.197),
+        bone = 18905
+    }
+},
+```
+
+## Stations Animations
+```lua filename="mt_restaurants\data\animations\stations.lua"
+---@class Animation
+---@field dict string Animation dictionary
+---@field clip string Animation clip
+
+---@class StationAction
+---@field label string Display label
+---@field anim Animation Animation played for the action
+
+---@type table<string, StationAction>
+```
+
+Example animation
+```lua copy
+exampleanim = {
+    label = 'Example Animation',
+    anim = {
+        dict = 'anim@amb@nightclub@mini@drinking@drinking_shots@ped_a@normal',
+        clip = 'pour_one'
+    }
+},
+```
+
+## Peds Animations
+```lua filename="mt_restaurants\data\animations\peds.lua"
+---@class PropConfig
+---@field model string Prop model name
+---@field pos vector3 Position offset
+---@field rot vector3 Rotation offset
+---@field bone number Ped bone ID
+
+---@class SceneAnimation
+---@field dict string Animation dictionary
+---@field clip string Animation clip
+---@field prop? PropConfig Primary prop
+---@field prop2? PropConfig Secondary prop
+
+---@type table<string, SceneAnimation>
+```
+
+Example animation
+```lua copy
+example = {
+    dict = 'anim@scripted@island@special_peds@pavel@hs4_pavel_ig5_caviar_p1',
+    clip = 'base_idle',
+    prop = {
+        model = 'h4_prop_h4_caviar_tin_01a',
+        pos = vec3(0.0, 0.0300, 0.0100),
+        rot = vec3(0.0, 0.0, 0.0),
+        bone = 60309
+    },
+    prop2 = {
+        model = 'h4_prop_h4_caviar_spoon_01a',
+        pos = vec3(0.0, 0.0, 0.0),
+        rot = vec3(0.0, 0.0, 0.0),
+        bone = 28422
+    }
+},
+```
