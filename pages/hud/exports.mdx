@@ -1,10 +1,30 @@
-# Client exports
+# Explore our development exports
+
+## Client exports
 
 **Show notification**
 ```lua copy
+---@param data table
+---@param data.type string Type of notification (info, success, error)
+---@param data.message string Message to show
+---@param data.duration? number Duration of notification in milliseconds
 exports.mt_hud:showNotification({
     type = 'info',
     message = 'This is an info notification',
     duration = 5000
 })
+```
+
+# Server exports
+
+**Update buff status**
+This will add an custom icon in your HUD.
+If the value sent is higher than 0 it'll create the icon or update if it exists, update it. If the value is 0 or under 0 it'll remove it.
+```lua
+---@param source number
+---@param buffName string Buff id (must be unique)
+---@param icon string Icon to show from fontawesome
+---@param value number Value to show
+---@param color string Color as hex
+exports.mt_hud:updateBuffStatus(source, buffName, icon, value, color)
 ```
