@@ -1,0 +1,27 @@
+# Frenquent asked questions about MT Restaurants v3
+
+## Does it support other inventories?
+No, our script is built around ox_inventory and natively does not support any other inventory.
+We have left all inventory exports open so the customers can edit, however this is at their own risk, we don't support those changes and can't affirm if the inventories will actually work with it.
+Most of the inventories, like qb-inventory, lack exports needed to handle our script's workflow.
+
+## How do I add money to the restaurant?
+The script works with external banking or management systems for money management.
+If you use your framework's native banking system, the only thing you'll need to do is go to the banking and add the money tehre in-game.
+If you use a different system, you'll need to replace the exports in the `modules/bridge/(yourframework)/server.lua` to your system's exports.
+
+## How do I change the amount of hunger/thirst of a recipe?
+The hunger and thirst levels are based on the recipe calories.
+Those calories are based on a sum of all the ingredients calories in the recipe.
+If you want to change the amount of hunger/thirst a recipe gives you, you'll need to change the amount of calories in the ingredients, those can be changed in the `data/ingredients.lua`.
+Each 10 calories equals to 1% of hunger/thirst.
+
+## How do I add a custom buff?
+The buffs are similar to the calories.
+You can change the buffs values in each ingredient in the `data/ingredients.lua`.
+The available buffs options are created/defined in the `modules/utils/buffs/*.lua`, there you can change the code to add or remove buffs or even create your own custom buffs with your own actions.
+
+By default there are 3 default buffs:
+- alcohol,
+- stress,
+- armor.
